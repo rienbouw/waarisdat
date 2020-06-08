@@ -5,8 +5,9 @@ import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { ToastController } from "@ionic/angular";
-import {GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent} from "@ionic-native/google-maps";
+import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent } from "@ionic-native/google-maps";
 
+// declare var google;
 
 @Component({
   selector: "app-tab1",
@@ -17,28 +18,56 @@ export class Tab1Page implements OnInit {
   lat: number;
   lng: number;
   address: string;
+  googleMap: any;
 
   constructor(
     private http: HttpClient,
     public toastController: ToastController
-  ) {}
+  ) { }
 
   ngOnInit() {
-//     call get current location function on initializing
+    // call get current location function on initializing
+    this.getCurrentLocation();
 
-   this.getCurrentLocation();
+    // this.googleMap.addListener('click', function (e) {
+    //   this.placeMarker(e.latLng, this.googleMap);
+    // });
 
-   
+    //   this.googleMap.addListener('click', function(e) {
+    //     placeMarker(e.latLng, map);
+    // });
+    // this.googleMap.on("click", e => {
+    //   console.log(e.latlng); // get the coordinates
+    //   let marker = new google.maps.Marker(e.latlng)
+    //   marker.setMap(this.googleMap)
+    // });
+
   }
 
-   //Function to get the current geo position of the device
+  onMapReady(map: any) {
+    console.log(map);
+    this.googleMap = map;
+  }
+
+
+
+  // placeMarker(position, map) {
+  //   var marker = new google.maps.Marker({
+  //     position: position,
+  //     map: map
+  //   });
+  //   map.panTo(position);
+  // }
+
+
+  //Function to get the current geo position of the device
 
   getCurrentLocation() {
     Plugins.Geolocation.getCurrentPosition().then(result => {
       this.lat = result.coords.latitude;
       this.lng = result.coords.longitude;
 
-     //  calling getAddress function to decode the address
+      //  calling getAddress function to decode the address
 
       this.getAddress(this.lat, this.lng).subscribe(decodedAddress => {
         this.address = decodedAddress;
@@ -47,13 +76,13 @@ export class Tab1Page implements OnInit {
     });
   }
 
-   //This function makes an http call to google api to decode the cordinates
+  //This function makes an http call to google api to decode the cordinates
 
   private getAddress(lat: number, lan: number) {
     return this.http
       .get<any>(
         `https:maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lan}&key=${
-          environment.googleMapsAPIKey
+        environment.googleMapsAPIKey
         }`
       )
       .pipe(
@@ -69,22 +98,22 @@ export class Tab1Page implements OnInit {
   // function to display the toast with location and dismiss button
 
   async presentToast() {
-     const toast = await this.toastController.create({
-       message: this.address,
+    const toast = await this.toastController.create({
+      message: this.address,
 
-       position: "middle",
-       buttons: [
-         {
-           icon: "close-circle",
-           role: "cancel"
-         }
-       ]
-     });
-     toast.present();
+      position: "middle",
+      buttons: [
+        {
+          icon: "close-circle",
+          role: "cancel"
+        }
+      ]
+    });
+    toast.present();
   }
 
   // click function to display a toast message with the address
-  
+
   onMarkerClick(params: any) {
     alert("Marker Data: " + params);
     let marker: Marker = <Marker>params[1];
@@ -94,5 +123,9 @@ export class Tab1Page implements OnInit {
     marker.setIcon(iconData);
 
     this.presentToast();
+  }
+
+  onMapClick(clickedCoordinate) {
+    alert("Map click");
   }
 }
