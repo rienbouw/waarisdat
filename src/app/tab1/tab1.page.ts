@@ -17,6 +17,7 @@ import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent 
 export class Tab1Page implements OnInit {
   lat: number;
   lng: number;
+  selectedMarker;
   address: string;
   googleMap: any;
 
@@ -125,7 +126,15 @@ export class Tab1Page implements OnInit {
     this.presentToast();
   }
 
-  onMapClick(clickedCoordinate) {
-    alert("Map click");
+  onMapClick(event) {
+    this.selectedMarker = {
+      lat: event.coords.lat,
+      lng: event.coords.lng
+    };
+    this.getAddress(event.coords.lat, event.coords.lng).subscribe(decodedAddress => {
+      this.address = decodedAddress;
+      alert(this.address);
+    });
+
   }
 }
