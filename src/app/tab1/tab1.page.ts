@@ -82,7 +82,7 @@ export class Tab1Page implements OnInit {
   private getAddress(lat: number, lan: number) {
     return this.http
       .get<any>(
-        `https:maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lan}&key=${
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lan}&key=${
         environment.googleMapsAPIKey
         }`
       )
