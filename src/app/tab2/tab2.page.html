@@ -7,11 +7,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
- <div class="ion-padding">
-  <ion-slides [options]="slideOptsOne" #slideWithNav  (ionSlideDidChange)="SlideDidChange(sliderOne,slideWithNav)">
-    <ion-slide *ngFor="let s of sliderOne.slidesItems">
-        <a (click)="onPhotoClick()"><img src="assets/images/Waarisdit-00{{s.id}}.jpg"></a>
-     </ion-slide>
- </ion-slides>
- </div>
+  <div class="ion-padding">
+    <ion-slides [options]="slideOptsOne" #slideWithNav (ionSlideDidChange)="SlideDidChange(sliderOne,slideWithNav)">
+      <ion-slide *ngFor="let s of sliderOne.slidesItems; let i=index">
+        <a (click)="onPhotoClick(i)"><img src="assets/images/Waarisdit-00{{s.id}}.jpg"></a>
+      </ion-slide>
+    </ion-slides>
+  </div>
 </ion-content>

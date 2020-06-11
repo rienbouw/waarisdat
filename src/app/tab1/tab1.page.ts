@@ -6,6 +6,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { ToastController } from "@ionic/angular";
 import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent } from "@ionic-native/google-maps";
+import { WaarisdatService } from "../service/waarisdat.service";
 
 // declare var google;
 
@@ -23,7 +24,8 @@ export class Tab1Page implements OnInit {
 
   constructor(
     private http: HttpClient,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public waarisdatService: WaarisdatService
   ) { }
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class Tab1Page implements OnInit {
     //   let marker = new google.maps.Marker(e.latlng)
     //   marker.setMap(this.googleMap)
     // });
+
 
   }
 
@@ -127,12 +130,14 @@ export class Tab1Page implements OnInit {
   }
 
   onMapClick(event) {
+    console.log(this.waarisdatService.currentPhotoIndex);
     this.selectedMarker = {
       lat: event.coords.lat,
       lng: event.coords.lng
     };
     this.getAddress(event.coords.lat, event.coords.lng).subscribe(decodedAddress => {
       this.address = decodedAddress;
+      //let currentPhotoIndex: any = Tab2Page.get_CurrentPhotoIndex();
       alert(this.address);
     });
 
