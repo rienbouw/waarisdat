@@ -15,10 +15,11 @@ import { WaarisdatService } from "../service/waarisdat.service";
   templateUrl: "tab1.page.html",
   styleUrls: ["tab1.page.scss"]
 })
-export class Tab1Page implements OnInit {
+export class MapPage implements OnInit {
   lat: number;
   lng: number;
-  selectedMarker;
+  markers = [];
+  newMarker;
   address: string;
   googleMap: any;
 
@@ -75,7 +76,7 @@ export class Tab1Page implements OnInit {
 
       this.getAddress(this.lat, this.lng).subscribe(decodedAddress => {
         this.address = decodedAddress;
-        console.log(this.address);
+        //console.log(this.address);
       });
     });
   }
@@ -119,27 +120,41 @@ export class Tab1Page implements OnInit {
   // click function to display a toast message with the address
 
   onMarkerClick(params: any) {
-    alert("Marker Data: " + params);
+    //alert("Marker Data: " + params);
     let marker: Marker = <Marker>params[1];
     let customInfo: any = marker.get('customInfo');
-    alert("Custom Info: " + customInfo);
+    //alert("Custom Info: " + customInfo);
     let iconData: any = marker.get('iconData');
     marker.setIcon(iconData);
 
     this.presentToast();
   }
 
-  onMapClick(event) {
+  onMapClick(lat: number, lng: number) {
+    this.markers.push({
+      lat, lng, alpha: 1,
+      icon: {
+        url: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|f5f242|000000',
+        scaledSize: {
+          width: 30,
+          height: 40
+        }
+      }
+    });
     console.log(this.waarisdatService.currentPhotoIndex);
-    this.selectedMarker = {
-      lat: event.coords.lat,
-      lng: event.coords.lng
+
+    this.newMarker = {
+      lat: lat,
+      lng: lng,
+      icon: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|FF0300|000000'
     };
-    this.getAddress(event.coords.lat, event.coords.lng).subscribe(decodedAddress => {
+
+    this.getAddress(lat, lng).subscribe(decodedAddress => {
       this.address = decodedAddress;
-      //let currentPhotoIndex: any = Tab2Page.get_CurrentPhotoIndex();
-      alert(this.address);
+      console.log(this.address);
     });
 
   }
+
+
 }

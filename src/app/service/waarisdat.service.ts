@@ -4,6 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class WaarisdatService {
-  currentPhotoIndex: number;
+  currentPhotoIndex: number = 0;
   constructor() { }
 }

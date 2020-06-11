@@ -9,7 +9,7 @@ import { WaarisdatService } from "../service/waarisdat.service";
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class PhotoPage {
 
   sliderOne: any;
   currentPhotoIndex;
@@ -46,11 +46,15 @@ export class Tab2Page {
 
   onPhotoClick(params: any) {
     this.waarisdatService.currentPhotoIndex = params;
-    this.router.navigate(['/tabs/tab1'])
+    this.router.navigate(['/tabs/map'])
 
   }
 
   get_CurrentPhotoIndex() {
     return this.currentPhotoIndex;
+  }
+
+  SlideDidChange(sliderOne, slideWithNav) {
+
   }
 }

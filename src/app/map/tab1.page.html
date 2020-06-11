@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Utrecht - Kaart
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" (mapClick)="onMapClick($event.coords.lat, $event.coords.lng)">
+    <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [opacity]="marker.alpha"
+      [markerDraggable]="true" [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)">
+    </agm-marker>
+  </agm-map>
+</ion-content>

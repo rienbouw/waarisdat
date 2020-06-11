@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
+import { MapPage } from './tab1.page';
 import { HttpClientModule } from '@angular/common/http';
 //import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
@@ -17,14 +17,14 @@ import { environment } from "../../environments/environment";
     IonicModule,
     CommonModule,
     FormsModule,
-  //  ExploreContainerComponentModule,
-   // Tab1PageRoutingModule,
+    //  ExploreContainerComponentModule,
+    // Tab1PageRoutingModule,
     HttpClientModule,
-    RouterModule.forChild([{ path: "", component: Tab1Page }]),
+    RouterModule.forChild([{ path: "", component: MapPage }]),
     AgmCoreModule.forRoot({
       apiKey: environment.googleMapsAPIKey
-    }) 
+    })
   ],
-  declarations: [Tab1Page]
+  declarations: [MapPage]
 })
-export class Tab1PageModule {}
+export class Tab1PageModule { }
