@@ -1,7 +1,7 @@
 # waarisdat
 ![alt text](2020-06-12_12h06_24.jpg?raw=true "Photos")
 ![alt text](2020-06-12_12h09_49.jpg?raw=true "Map")
-<p>
+
 Buzz words:
 
 - Ionic
