@@ -1,4 +1,5 @@
 # waarisdat
+![alt text](2020-06-12_12h06_24.jpg?raw=true "Photos")
 Buzz words:
 
 - Ionic
@@ -15,4 +16,3 @@ This app is a quiz app.
 It shows you pictures and you have to point them on the map.
 The score is calculated by measuring the distance of the markers from the correct places.
 
-![alt text](src/assets/icon/favicon.png?raw=true "Photos")
