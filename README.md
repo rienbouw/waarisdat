@@ -15,4 +15,4 @@ This app is a quiz app.
 It shows you pictures and you have to point them on the map.
 The score is calculated by measuring the distance of the markers from the correct places.
 
-![alt text](https://github.com/rienbouw/waarisdat.git/src/assets/icon/favicon.png?raw=true)
+![alt text](src/assets/icon/favicon.png?raw=true "Photos")
