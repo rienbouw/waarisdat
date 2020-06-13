@@ -5,5 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class WaarisdatService {
   currentPhotoIndex: number = 0;
+  markersCorrect = [];
+  markersGuess = [];
+
   constructor() { }
 }

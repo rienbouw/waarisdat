@@ -8,8 +8,6 @@ import { ToastController } from "@ionic/angular";
 import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent } from "@ionic-native/google-maps";
 import { WaarisdatService } from "../service/waarisdat.service";
 
-// declare var google;
-
 @Component({
   selector: "app-tab1",
   templateUrl: "tab1.page.html",
@@ -131,7 +129,7 @@ export class MapPage implements OnInit {
   }
 
   onMapClick(lat: number, lng: number) {
-    this.markers.push({
+    var newMarker = {
       lat, lng, alpha: 1,
       icon: {
         url: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|f5f242|000000',
@@ -140,14 +138,17 @@ export class MapPage implements OnInit {
           height: 40
         }
       }
-    });
+    };
+
+    this.markers.push(newMarker);
+    this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = newMarker;
     console.log(this.waarisdatService.currentPhotoIndex);
 
-    this.newMarker = {
-      lat: lat,
-      lng: lng,
-      icon: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|FF0300|000000'
-    };
+    // this.newMarker = {
+    //   lat: lat,
+    //   lng: lng,
+    //   icon: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|FF0300|000000'
+    // };
 
     this.getAddress(lat, lng).subscribe(decodedAddress => {
       this.address = decodedAddress;
@@ -155,6 +156,4 @@ export class MapPage implements OnInit {
     });
 
   }
-
-
 }
