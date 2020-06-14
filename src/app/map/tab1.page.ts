@@ -138,7 +138,7 @@ export class MapPage implements OnInit {
   }
 
   onMapClick(lat: number, lng: number) {
-    console.log(lat, lng);
+    //console.log(lat, lng);
     var newMarker = {
       lat, lng, alpha: 1,
       icon: {
@@ -164,11 +164,11 @@ export class MapPage implements OnInit {
       this.address = decodedAddress;
       //console.log(this.address);
     });
-    console.log("onMapClick() exit");
+    //console.log("onMapClick() exit");
   }
 
   protected mapLoad(map) {
-    console.log("mapLoad: + " + map);
+    //console.log("mapLoad: + " + map);
     //this.renderGeolocationControl(map);
   }
 
