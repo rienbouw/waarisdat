@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { WaarisdatService } from "../service/waarisdat.service";
-import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent } from "@ionic-native/google-maps";
+import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent, LatLng } from "@ionic-native/google-maps";
 
 
 declare var google;
@@ -63,27 +63,30 @@ export class PhotoPage {
 
   }
 
-  getDistanceBetween(point1, point2) {
-
-    const p1 = new google.maps.LatLng(
-      point1.lat,
-      point1.lng
-    );
-    const p2 = new google.maps.LatLng(
-      point2.lat,
-      point2.lng
-    );
+  getDistanceBetween(p1, p2) {
     return google.maps.geometry.spherical.computeDistanceBetween(p1, p2).toFixed(0);
-
-
-
   }
 
   klaarButton() {
-    var marker1: Marker = this.waarisdatService.markersGuess[0];
-    var marker2: Marker = this.waarisdatService.markersGuess[1];
-    console.log(marker1, marker2);
-    var distance = this.getDistanceBetween(marker1, marker2)
-    this.klaarButtonText = (1000 - distance).toString();
+    let nPhotos = this.waarisdatService.markersGuess.length;
+    let totalScore: number = 0;
+    for (var index in this.waarisdatService.markersGuess) {
+
+      var p1: LatLng = this.waarisdatService.markersCorrect[index];
+      var p2: LatLng = this.waarisdatService.markersGuess[index];
+      console.log(p1, p2);
+      var distance = this.getDistanceBetween(p1, p2);
+      console.log(distance);
+      let score: number = Math.round((1000 - distance) / 10);
+      if (score < 0) {
+        score = 0;
+      }
+      console.log("Foto " + (index + 1) + " : " + score);
+      totalScore += score;
+
+    }
+    totalScore = Math.round(totalScore / nPhotos);
+    this.klaarButtonText = "Score: " + totalScore.toString() + " van de 100";
+
   }
 }

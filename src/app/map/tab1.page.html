@@ -7,10 +7,12 @@
 </ion-header>
 
 <ion-content>
-  <agm-map #map [latitude]="lat" [longitude]="lng" [zoom]="12" (mapReady)="mapLoad($event)"
+
+  <!-- (mapReady)="mapLoad($event)" [markerDraggable]="true"-->
+  <agm-map #map [latitude]="lat" [longitude]="lng" [zoom]="14"
     (mapClick)="onMapClick($event.coords.lat, $event.coords.lng)">
     <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [opacity]="marker.alpha"
-      [markerDraggable]="true" [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)">
+      [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)">
     </agm-marker>
   </agm-map>
 </ion-content>

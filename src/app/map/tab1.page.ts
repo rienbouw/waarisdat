@@ -7,10 +7,10 @@ import { environment } from "../../environments/environment";
 import { ToastController } from "@ionic/angular";
 import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent } from "@ionic-native/google-maps";
 import { WaarisdatService } from "../service/waarisdat.service";
-import { get } from 'scriptjs';
+//import { get } from 'scriptjs';
 
 declare var klokantech;
-
+declare var google;
 
 @Component({
   selector: "app-tab1",
@@ -48,6 +48,11 @@ export class MapPage implements OnInit {
     //   marker.setMap(this.googleMap)
     // });
 
+    this.waarisdatService.markersCorrect[0] = new google.maps.LatLng(52.076789403954095, 5.129023292050916);
+    this.waarisdatService.markersCorrect[1] = new google.maps.LatLng(52.09858353293515, 5.111449956866156);
+    this.waarisdatService.markersCorrect[2] = new google.maps.LatLng(52.08605556641818, 5.117765557501341);
+    this.waarisdatService.markersCorrect[3] = new google.maps.LatLng(52.0820819114837, 5.133151195699135);
+    this.waarisdatService.markersCorrect[4] = new google.maps.LatLng(52.097271420058796, 5.126982463612952);
 
   }
 
@@ -78,7 +83,7 @@ export class MapPage implements OnInit {
 
       this.getAddress(this.lat, this.lng).subscribe(decodedAddress => {
         this.address = decodedAddress;
-        //console.log(this.address);
+        console.log("getCurrentLocation: " + this.address);
       });
     });
   }
@@ -133,6 +138,7 @@ export class MapPage implements OnInit {
   }
 
   onMapClick(lat: number, lng: number) {
+    console.log(lat, lng);
     var newMarker = {
       lat, lng, alpha: 1,
       icon: {
@@ -144,9 +150,9 @@ export class MapPage implements OnInit {
       }
     };
 
-    this.markers.push(newMarker);
-    this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = newMarker;
-    console.log(this.waarisdatService.currentPhotoIndex);
+    this.markers[this.waarisdatService.currentPhotoIndex] = newMarker;
+    this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = new google.maps.LatLng(lat, lng);
+    console.log("this.waarisdatService.markersCorrect[" + this.waarisdatService.currentPhotoIndex + "] = new google.maps.LatLng(" + lat + ", " + lng + ");");
 
     // this.newMarker = {
     //   lat: lat,
@@ -156,21 +162,21 @@ export class MapPage implements OnInit {
 
     this.getAddress(lat, lng).subscribe(decodedAddress => {
       this.address = decodedAddress;
-      console.log(this.address);
+      //console.log(this.address);
     });
-
+    console.log("onMapClick() exit");
   }
 
   protected mapLoad(map) {
     console.log("mapLoad: + " + map);
-    this.renderGeolocationControl(map);
+    //this.renderGeolocationControl(map);
   }
 
-  renderGeolocationControl(map) {
-    get('https://cdn.klokantech.com/maptilerlayer/v1/index.js', () => {
-      const geoloccontrol = new klokantech.GeolocationControl(map, 18);
-      console.log(geoloccontrol);
-    });
-  }
+  // renderGeolocationControl(map) {
+  //   get('https://cdn.klokantech.com/maptilerlayer/v1/index.js', () => {
+  //     const geoloccontrol = new klokantech.GeolocationControl(map, 18);
+  //     console.log(geoloccontrol);
+  //   });
+  // }
 
 }
