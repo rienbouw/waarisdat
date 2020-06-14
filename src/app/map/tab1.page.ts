@@ -7,6 +7,10 @@ import { environment } from "../../environments/environment";
 import { ToastController } from "@ionic/angular";
 import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent } from "@ionic-native/google-maps";
 import { WaarisdatService } from "../service/waarisdat.service";
+import { get } from 'scriptjs';
+
+declare var klokantech;
+
 
 @Component({
   selector: "app-tab1",
@@ -47,8 +51,8 @@ export class MapPage implements OnInit {
 
   }
 
-  onMapReady(map: any) {
-    console.log(map);
+  initMap(map: any) {
+    console.log("My Google Map : " + map);
     this.googleMap = map;
   }
 
@@ -156,4 +160,17 @@ export class MapPage implements OnInit {
     });
 
   }
+
+  protected mapLoad(map) {
+    console.log("mapLoad: + " + map);
+    this.renderGeolocationControl(map);
+  }
+
+  renderGeolocationControl(map) {
+    get('https://cdn.klokantech.com/maptilerlayer/v1/index.js', () => {
+      const geoloccontrol = new klokantech.GeolocationControl(map, 18);
+      console.log(geoloccontrol);
+    });
+  }
+
 }
