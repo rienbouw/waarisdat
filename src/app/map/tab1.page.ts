@@ -164,7 +164,7 @@ export class MapPage implements OnInit {
       this.address = decodedAddress;
       //console.log(this.address);
     });
-    //console.log("onMapClick() exit");
+    //console.log("onMapClick() ready");
   }
 
   protected mapLoad(map) {
