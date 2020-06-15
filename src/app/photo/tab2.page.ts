@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { WaarisdatService } from "../service/waarisdat.service";
 import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent, LatLng } from "@ionic-native/google-maps";
-
+import { IonSlides } from '@ionic/angular';
 
 declare var google;
 
@@ -15,9 +15,14 @@ declare var google;
 })
 export class PhotoPage {
 
-  sliderOne: any;
+  @ViewChild(IonSlides) slides: IonSlides;
+
+  public sliderOne: any;
   currentPhotoIndex;
-  klaarButtonText = "Gereed, laat mij de score zien";
+  klaarButtonText = "KLAAR! Laat mij de score zien.";
+  photoNumber = "1";
+
+  slideChanged = ev => this.photoNumber = ev.realIndex + 1;
 
   constructor(
     public navCtrl: NavController,
@@ -55,14 +60,31 @@ export class PhotoPage {
 
   }
 
+  ionViewWillEnter() {
+    if (this.waarisdatService.currentPhotoIndex == 4) {
+      this.slides.slideTo(0);
+    } else {
+      this.slides.slideNext();
+    }
+
+    //this.photoNumber = this.waarisdatService.currentPhotoIndex.toString();
+  }
   get_CurrentPhotoIndex() {
     return this.currentPhotoIndex;
   }
 
-  SlideDidChange(sliderOne, slideWithNav) {
+  SlideDidChange(ev) {
 
+    this.currentPhotoIndex = this.slides.getActiveIndex();
+    //this.photoNumber = this.slides.getActiveIndex() + 1;
+    console.log("SlideDidChanged " + this.currentPhotoIndex);
   }
 
+
+  // slideChanged(ev) {
+  //   console.log("slideChanged");
+
+  // }
   getDistanceBetween(p1, p2) {
     return google.maps.geometry.spherical.computeDistanceBetween(p1, p2).toFixed(0);
   }
@@ -81,7 +103,8 @@ export class PhotoPage {
       if (score < 0) {
         score = 0;
       }
-      console.log("Foto " + (index + 1) + " : " + score);
+      let photoNumber = index + 1;
+      console.log("Foto " + photoNumber + " : " + score);
       totalScore += score;
 
     }

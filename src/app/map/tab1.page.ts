@@ -7,6 +7,7 @@ import { environment } from "../../environments/environment";
 import { ToastController } from "@ionic/angular";
 import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent } from "@ionic-native/google-maps";
 import { WaarisdatService } from "../service/waarisdat.service";
+import { Router } from '@angular/router';
 //import { get } from 'scriptjs';
 
 declare var klokantech;
@@ -28,7 +29,8 @@ export class MapPage implements OnInit {
   constructor(
     private http: HttpClient,
     public toastController: ToastController,
-    public waarisdatService: WaarisdatService
+    public waarisdatService: WaarisdatService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -153,6 +155,10 @@ export class MapPage implements OnInit {
     this.markers[this.waarisdatService.currentPhotoIndex] = newMarker;
     this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = new google.maps.LatLng(lat, lng);
     console.log("this.waarisdatService.markersCorrect[" + this.waarisdatService.currentPhotoIndex + "] = new google.maps.LatLng(" + lat + ", " + lng + ");");
+    setTimeout(() => {
+      this.router.navigate(['/tabs/photo']);
+    },
+      1000);
 
     // this.newMarker = {
     //   lat: lat,
@@ -160,10 +166,10 @@ export class MapPage implements OnInit {
     //   icon: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|FF0300|000000'
     // };
 
-    this.getAddress(lat, lng).subscribe(decodedAddress => {
-      this.address = decodedAddress;
-      //console.log(this.address);
-    });
+    // this.getAddress(lat, lng).subscribe(decodedAddress => {
+    //   this.address = decodedAddress;
+    //   //console.log(this.address);
+    //});
     //console.log("onMapClick() xxexit");
   }
 
