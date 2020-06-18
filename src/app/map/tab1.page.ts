@@ -58,13 +58,12 @@ export class MapPage implements OnInit {
 
   }
 
-  initMap(map: any) {
-    console.log("My Google Map : " + map);
-    this.googleMap = map;
-  }
-
   mapReady(map) {
-    console.log("mapReady");
+    this.googleMap = map;
+
+    this.googleMap.addListener("dragend", function () {
+      console.log("dragend");
+    });
 
     for (let i = 0; i < this.markers.length; i++) {
       console.log("aici")
@@ -186,6 +185,10 @@ export class MapPage implements OnInit {
     //   //console.log(this.address);
     //});
     //console.log("onMapClick() xxexit");
+  }
+
+  markerDragEnd(marker: any, lat: number, lng: number) {
+    this.waarisdatService.markersGuess[marker["photoNumber"]] = new google.maps.LatLng(lat, lng);
   }
 
   protected mapLoad(map) {

@@ -104,15 +104,13 @@ export class PhotoPage {
 
       var p1: LatLng = this.waarisdatService.markersCorrect[index];
       var p2: LatLng = this.waarisdatService.markersGuess[index];
-      console.log(p1, p2);
       var distance = this.getDistanceBetween(p1, p2);
-      console.log(distance);
       let score: number = Math.round((1000 - distance) / 10);
       if (score < 0) {
         score = 0;
       }
-      let photoNumber = index + 1;
-      console.log("Foto " + photoNumber + " : " + score);
+      var photoNumber: number = Number(index) + 1;
+      console.log("Foto " + photoNumber + " afstand: " + distance + "m, score: " + score);
       totalScore += score;
 
     }

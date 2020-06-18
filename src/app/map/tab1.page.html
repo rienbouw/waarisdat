@@ -8,11 +8,11 @@
 
 <ion-content>
 
-  <!-- (mapReady)="mapLoad($event)" [markerDraggable]="true"-->
+  <!-- (dragEnd)="markerDragEnd(coords, $event)"(mapReady)="mapLoad($event)" -->
   <agm-map #map [latitude]="lat" [longitude]="lng" [zoom]="14" [clickableIcons]="false"
-    (mapClick)="onMapClick($event.coords.lat, $event.coords.lng)" (mapRady)="mapReady($event)">
+    (mapClick)="onMapClick($event.coords.lat, $event.coords.lng)" (mapReady)="mapReady($event)">
     <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [opacity]="marker.alpha"
-      [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)">
-    </agm-marker>
+      [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)"
+      (dragEnd)="markerDragEnd(marker,$event.coords.lat, $event.coords.lng)" [markerDraggable]="true"></agm-marker>
   </agm-map>
 </ion-content>
