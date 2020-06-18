@@ -63,7 +63,17 @@ export class MapPage implements OnInit {
     this.googleMap = map;
   }
 
+  mapReady(map) {
+    console.log("mapReady");
 
+    for (let i = 0; i < this.markers.length; i++) {
+      console.log("aici")
+      new google.maps.Marker({
+        position: { lat: this.markers[i].lat, lng: this.markers[i].long },
+        map: map,
+      });
+    }
+  }
 
   // placeMarker(position, map) {
   //   var marker = new google.maps.Marker({
@@ -149,10 +159,15 @@ export class MapPage implements OnInit {
           width: 30,
           height: 40
         }
-      }
+      },
+      photoNumber: this.waarisdatService.currentPhotoIndex + 1
     };
 
-    this.markers[this.waarisdatService.currentPhotoIndex] = newMarker;
+    if (this.markers[this.waarisdatService.currentPhotoIndex] == null) {
+      this.markers.push(newMarker);
+    } else {
+      this.markers[this.waarisdatService.currentPhotoIndex] = newMarker;
+    }
     this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = new google.maps.LatLng(lat, lng);
     console.log("this.waarisdatService.markersCorrect[" + this.waarisdatService.currentPhotoIndex + "] = new google.maps.LatLng(" + lat + ", " + lng + ");");
     setTimeout(() => {

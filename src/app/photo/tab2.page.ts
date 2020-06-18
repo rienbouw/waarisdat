@@ -21,6 +21,7 @@ export class PhotoPage {
   currentPhotoIndex;
   klaarButtonText = "KLAAR! Laat mij de score zien.";
   photoNumber = "1";
+  firstView: boolean;
 
   slideChanged = ev => this.photoNumber = ev.realIndex + 1;
 
@@ -52,23 +53,30 @@ export class PhotoPage {
         }
       ]
     };
+
+
+    this.firstView = true;
   }
 
   onPhotoClick(params: any) {
+    //this.slides.lockSwipeToNext(true);
     this.waarisdatService.currentPhotoIndex = params;
     this.router.navigate(['/tabs/map'])
 
   }
 
   ionViewWillEnter() {
-    if (this.waarisdatService.currentPhotoIndex == 4) {
-      this.slides.slideTo(0);
+    if (this.firstView) {
+      this.firstView = false;
     } else {
-      this.slides.slideNext();
+      if (this.waarisdatService.currentPhotoIndex == this.sliderOne.slidesItems.length - 1) {
+        this.slides.slideTo(0);
+      } else {
+        this.slides.slideNext();
+      }
     }
-
-    //this.photoNumber = this.waarisdatService.currentPhotoIndex.toString();
   }
+
   get_CurrentPhotoIndex() {
     return this.currentPhotoIndex;
   }
