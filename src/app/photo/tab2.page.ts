@@ -18,6 +18,11 @@ export class PhotoPage {
 
   @ViewChild(IonSlides) slides: IonSlides;
 
+  slideOptsOne = {
+    zoom: {
+      maxRatio: 5
+    }
+  };
   public sliderOne: any;
   currentPhotoIndex;
   klaarButtonText = "KLAAR! Laat mij de score zien.";

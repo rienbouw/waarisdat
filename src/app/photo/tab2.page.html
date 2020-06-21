@@ -12,7 +12,8 @@
     <ion-slides pager="true" paginationType="fraction" [options]="slideOptsOne" zoom #slideWithNav
       (ionSlideDidChange)=" slideChanged($event)">
       <ion-slide *ngFor="let s of sliderOne.slidesItems; let i=index">
-        <a (click)="onPhotoClick(i)"><img src="assets/images/Waarisdit-00{{s.id}}.jpg"></a>
+        <div class="swiper-zoom-container">
+          <a (click)="onPhotoClick(i)"><img src="assets/images/Waarisdit-00{{s.id}}.jpg"></a></div>
       </ion-slide>
     </ion-slides>
   </div>
