@@ -14,6 +14,7 @@ Keywords:
 - PWA
 - Googlemap
 - Add Markers
+- Drag Markers
 - Show current geolocation as the blue circle 
 - Compute distance between Markers
 - Photo slider

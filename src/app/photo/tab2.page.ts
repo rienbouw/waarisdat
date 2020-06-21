@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { WaarisdatService } from "../service/waarisdat.service";
 import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent, LatLng } from "@ionic-native/google-maps";
 import { IonSlides } from '@ionic/angular';
+//import { } from '@types/googlemaps';
 
 declare var google;
 
@@ -65,17 +66,17 @@ export class PhotoPage {
 
   }
 
-  ionViewWillEnter() {
-    if (this.firstView) {
-      this.firstView = false;
-    } else {
-      if (this.waarisdatService.currentPhotoIndex == this.sliderOne.slidesItems.length - 1) {
-        this.slides.slideTo(0);
-      } else {
-        this.slides.slideNext();
-      }
-    }
-  }
+  // ionViewWillEnter() {
+  //   if (this.firstView) {
+  //     this.firstView = false;
+  //   } else {
+  //     if (this.waarisdatService.currentPhotoIndex == this.sliderOne.slidesItems.length - 1) {
+  //       this.slides.slideTo(0);
+  //     } else {
+  //       this.slides.slideNext();
+  //     }
+  //   }
+  // }
 
   get_CurrentPhotoIndex() {
     return this.currentPhotoIndex;
@@ -98,19 +99,23 @@ export class PhotoPage {
   }
 
   klaarButton() {
-    let nPhotos = this.waarisdatService.markersGuess.length;
+    let nPhotos: number = 0; //this.waarisdatService.markersGuess.length;
     let totalScore: number = 0;
     for (var index in this.waarisdatService.markersGuess) {
 
-      var p1: LatLng = this.waarisdatService.markersCorrect[index];
-      var p2: LatLng = this.waarisdatService.markersGuess[index];
-      var distance = this.getDistanceBetween(p1, p2);
+      let guessMarker = this.waarisdatService.markersGuess[index];
+      var photoNumber = guessMarker["photoNumber"];
+      var latLngGuess: LatLng = new google.maps.LatLng(guessMarker["lat"], guessMarker["lng"]);
+      var correctLatLng: LatLng = this.waarisdatService.markersCorrect[photoNumber - 1];
+
+      var distance = this.getDistanceBetween(latLngGuess, correctLatLng);
       let score: number = Math.round((1000 - distance) / 10);
       if (score < 0) {
         score = 0;
       }
-      var photoNumber: number = Number(index) + 1;
+      //var photoNumber: number = Number(index) + 1;
       console.log("Foto " + photoNumber + " afstand: " + distance + "m, score: " + score);
+      nPhotos += 1;
       totalScore += score;
 
     }

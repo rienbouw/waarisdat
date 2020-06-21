@@ -167,12 +167,12 @@ export class MapPage implements OnInit {
     } else {
       this.markers[this.waarisdatService.currentPhotoIndex] = newMarker;
     }
-    this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = new google.maps.LatLng(lat, lng);
+    this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = newMarker; //new google.maps.LatLng(lat, lng);
     console.log("this.waarisdatService.markersCorrect[" + this.waarisdatService.currentPhotoIndex + "] = new google.maps.LatLng(" + lat + ", " + lng + ");");
-    setTimeout(() => {
-      this.router.navigate(['/tabs/photo']);
-    },
-      1000);
+    // setTimeout(() => {
+    //   this.router.navigate(['/tabs/photo']);
+    // },
+    //   1000);
 
     // this.newMarker = {
     //   lat: lat,
