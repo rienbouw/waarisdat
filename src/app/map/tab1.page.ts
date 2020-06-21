@@ -62,7 +62,7 @@ export class MapPage implements OnInit {
     this.googleMap = map;
 
     this.googleMap.addListener("dragend", function () {
-      console.log("dragend");
+      //console.log("dragend");
     });
 
     for (let i = 0; i < this.markers.length; i++) {
@@ -188,7 +188,27 @@ export class MapPage implements OnInit {
   }
 
   markerDragEnd(marker: any, lat: number, lng: number) {
-    this.waarisdatService.markersGuess[marker["photoNumber"]] = new google.maps.LatLng(lat, lng);
+    let photoNumber = marker["photoNumber"];
+    console.log("Photonumber " + photoNumber + " new position " + lat, lng);
+    // var repositionedMarker = {
+    //   lat, lng, alpha: 1,
+    //   icon: {
+    //     url: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|f5f242|000000',
+    //     scaledSize: {
+    //       width: 30,
+    //       height: 40
+    //     }
+    //   },
+    //   photoNumber: marker["photoNumber"]
+    // };
+    for (var index in this.waarisdatService.markersGuess) {
+      let guessMarker = this.waarisdatService.markersGuess[index];
+      if (guessMarker["photoNumber"] == photoNumber) {
+        guessMarker["lat"] = lat;
+        guessMarker["lng"] = lng;
+      }
+      //this.waarisdatService.markersGuess[marker["photoNumber"]-1] = repositionedMarker;
+    }
   }
 
   protected mapLoad(map) {
