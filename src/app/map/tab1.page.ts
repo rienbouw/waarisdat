@@ -171,7 +171,8 @@ export class MapPage implements OnInit {
       console.log("update marker " + (this.waarisdatService.currentPhotoIndex + 1));
       foundMarker["lat"] = lat;
       foundMarker["lng"] = lng;
-      //this.markers[this.waarisdatService.currentPhotoIndex] = foundMarker;
+      this.markers[this.waarisdatService.currentPhotoIndex] = null;
+      this.markers[this.waarisdatService.currentPhotoIndex] = foundMarker;
     }
     this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = newMarker; //new google.maps.LatLng(lat, lng);
     console.log("this.waarisdatService.markersCorrect[" + this.waarisdatService.currentPhotoIndex + "] = new google.maps.LatLng(" + lat + ", " + lng + ");");
