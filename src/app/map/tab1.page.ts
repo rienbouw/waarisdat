@@ -162,10 +162,16 @@ export class MapPage implements OnInit {
       photoNumber: this.waarisdatService.currentPhotoIndex + 1
     };
 
-    if (this.markers[this.waarisdatService.currentPhotoIndex] == null) {
+    var foundMarker = this.findGuessMarkerWithPhotnumber(this.waarisdatService.currentPhotoIndex + 1);
+    if (foundMarker == null) {
+      console.log("push marker " + (this.waarisdatService.currentPhotoIndex + 1));
       this.markers.push(newMarker);
     } else {
-      this.markers[this.waarisdatService.currentPhotoIndex] = newMarker;
+
+      console.log("update marker " + (this.waarisdatService.currentPhotoIndex + 1));
+      foundMarker["lat"] = lat;
+      foundMarker["lng"] = lng;
+      //this.markers[this.waarisdatService.currentPhotoIndex] = foundMarker;
     }
     this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = newMarker; //new google.maps.LatLng(lat, lng);
     console.log("this.waarisdatService.markersCorrect[" + this.waarisdatService.currentPhotoIndex + "] = new google.maps.LatLng(" + lat + ", " + lng + ");");
@@ -209,6 +215,17 @@ export class MapPage implements OnInit {
       }
       //this.waarisdatService.markersGuess[marker["photoNumber"]-1] = repositionedMarker;
     }
+  }
+
+  findGuessMarkerWithPhotnumber(photoNumber) {
+    var result = null;
+    for (var index in this.waarisdatService.markersGuess) {
+      let guessMarker = this.waarisdatService.markersGuess[index];
+      if (guessMarker["photoNumber"] == photoNumber) {
+        result = guessMarker;
+      }
+    }
+    return result;
   }
 
   protected mapLoad(map) {

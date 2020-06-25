@@ -26,10 +26,13 @@ export class PhotoPage {
   public sliderOne: any;
   currentPhotoIndex;
   klaarButtonText = "KLAAR! Laat mij de score zien.";
-  photoNumber = "1";
+  photoNumber = 1;
   firstView: boolean;
 
-  slideChanged = ev => this.photoNumber = ev.realIndex + 1;
+  // slideChanged = ev => {
+  //   console.log(ev);
+  //   this.photoNumber = ev.realIndex + 1
+  // };
 
   constructor(
     public navCtrl: NavController,
@@ -95,10 +98,13 @@ export class PhotoPage {
   }
 
 
-  // slideChanged(ev) {
-  //   console.log("slideChanged");
+  slideChanged(ev) {
+    this.slides.getActiveIndex().then(index => {
+      this.photoNumber = index + 1;
+    });
+  }
 
-  // }
+
   getDistanceBetween(p1, p2) {
     return google.maps.geometry.spherical.computeDistanceBetween(p1, p2).toFixed(0);
   }
