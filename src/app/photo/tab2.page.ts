@@ -70,7 +70,7 @@ export class PhotoPage {
   onPhotoClick(params: any) {
     //this.slides.lockSwipeToNext(true);
     this.waarisdatService.currentPhotoIndex = params;
-    this.router.navigate(['/tabs/map'])
+    this.navCtrl.navigateForward(['map'])
 
   }
 

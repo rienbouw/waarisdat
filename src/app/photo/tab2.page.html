@@ -1,12 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Utrecht - Foto's
+    <ion-title color="primary">
+      Waarisdat
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-button class="button button-block" (click)="klaarButton()">
+    {{klaarButtonText}}
+  </ion-button>
   <div class="nummering">#{{photoNumber}}</div>
   <!--</div> van {{this.sliderOne.slidesItems.length}}</div>-->
   <div class="ion-padding">
@@ -18,7 +21,5 @@
     </ion-slides>
   </div>
 
-  <ion-button class="button button-block" (click)="klaarButton()">
-    {{klaarButtonText}}
-  </ion-button>
+
 </ion-content>

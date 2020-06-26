@@ -4,7 +4,24 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./start/start.module').then(m => m.StartPageModule)
+  },
+  {
+    path: 'start',
+    loadChildren: () => import('./start/start.module').then(m => m.StartPageModule)
+  },
+  {
+    path: 'photo',
+    loadChildren: () => import('./photo/tab2.module').then(m => m.Tab2PageModule)
+  },
+  {
+    path: 'map',
+    loadChildren: () => import('./map/tab1.module').then(m => m.Tab1PageModule)
+  },
+  {
+    path: 'plkjlkjhoto',
+    redirectTo: '../../tabs/pxxhoto',
+    pathMatch: 'full'
   }
 ];
 @NgModule({
@@ -13,4 +30,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
