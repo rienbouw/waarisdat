@@ -21,7 +21,7 @@ declare var google;
 export class MapPage implements OnInit {
   lat: number;
   lng: number;
-  markers = [];
+
   newMarker;
   address: string;
   googleMap: any;
@@ -34,7 +34,7 @@ export class MapPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // call get current location function on initializing
+    console.log("ngOnInit map");
     this.getCurrentLocation();
 
     // this.googleMap.addListener('click', function (e) {
@@ -58,17 +58,21 @@ export class MapPage implements OnInit {
 
   }
 
+  backButton() {
+    this.router.navigate(['photo'])
+  }
+
   mapReady(map) {
     this.googleMap = map;
 
     this.googleMap.addListener("dragend", function () {
-      //console.log("dragend");
+
     });
 
-    for (let i = 0; i < this.markers.length; i++) {
+    for (let i = 0; i < this.waarisdatService.markers.length; i++) {
       console.log("aici")
       new google.maps.Marker({
-        position: { lat: this.markers[i].lat, lng: this.markers[i].long },
+        position: { lat: this.waarisdatService.markers[i].lat, lng: this.waarisdatService.markers[i].long },
         map: map,
       });
     }
@@ -94,7 +98,7 @@ export class MapPage implements OnInit {
 
       this.getAddress(this.lat, this.lng).subscribe(decodedAddress => {
         this.address = decodedAddress;
-        console.log("getCurrentLocation: " + this.address);
+        //console.log("getCurrentLocation: " + this.address);
       });
     });
   }
@@ -165,14 +169,14 @@ export class MapPage implements OnInit {
     var foundMarker = this.findGuessMarkerWithPhotnumber(this.waarisdatService.currentPhotoIndex + 1);
     if (foundMarker == null) {
       console.log("push marker " + (this.waarisdatService.currentPhotoIndex + 1));
-      this.markers.push(newMarker);
+      this.waarisdatService.markers.push(newMarker);
     } else {
 
       console.log("update marker " + (this.waarisdatService.currentPhotoIndex + 1));
       foundMarker["lat"] = lat;
       foundMarker["lng"] = lng;
-      this.markers[this.waarisdatService.currentPhotoIndex] = null;
-      this.markers[this.waarisdatService.currentPhotoIndex] = foundMarker;
+      this.waarisdatService.markers[this.waarisdatService.currentPhotoIndex] = null;
+      this.waarisdatService.markers[this.waarisdatService.currentPhotoIndex] = foundMarker;
     }
     this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = newMarker; //new google.maps.LatLng(lat, lng);
     console.log("this.waarisdatService.markersCorrect[" + this.waarisdatService.currentPhotoIndex + "] = new google.maps.LatLng(" + lat + ", " + lng + ");");

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router';
 import { MapPage } from './tab1.page';
 
 const routes: Routes = [
@@ -13,4 +13,11 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class Tab1PageRoutingModule { }
+export class Tab1PageRoutingModule {
+  // constructor(private router: Router) {
+  //   // override the route reuse strategy
+  //   this.router.routeReuseStrategy.shouldReuseRoute = function () {
+  //     return true;
+  //   };
+  // }
+}

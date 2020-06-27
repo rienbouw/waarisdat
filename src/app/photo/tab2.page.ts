@@ -67,39 +67,46 @@ export class PhotoPage {
     this.firstView = true;
   }
 
+  ngOnInit() {
+    //console.log("ngOnInit photo"); enable the loggen, and this page will be initialized each time it is navigated to!!!!!
+  }
+
   onPhotoClick(params: any) {
     //this.slides.lockSwipeToNext(true);
     this.waarisdatService.currentPhotoIndex = params;
-    this.navCtrl.navigateForward(['map'])
+    //console.log("onPhotoClick: currentPhotoIndex " + this.waarisdatService.currentPhotoIndex); //enable this line and ngOninit is called on map page!!!!!!!!!!!!
+    this.router.navigate(['map'])
 
   }
 
-  // ionViewWillEnter() {
-  //   if (this.firstView) {
-  //     this.firstView = false;
-  //   } else {
-  //     if (this.waarisdatService.currentPhotoIndex == this.sliderOne.slidesItems.length - 1) {
-  //       this.slides.slideTo(0);
-  //     } else {
-  //       this.slides.slideNext();
-  //     }
-  //   }
-  // }
+  ionViewWillEnter() {
+    if (this.firstView) {
+      this.firstView = false;
+    } else {
+      if (this.waarisdatService.currentPhotoIndex == this.sliderOne.slidesItems.length - 1) {
+        this.slides.slideTo(0);
+      } else {
+        this.slides.slideNext();
+      }
+    }
+    this.slideChanged();
+  }
 
   get_CurrentPhotoIndex() {
     return this.currentPhotoIndex;
   }
 
-  SlideDidChange(ev) {
+  // SlideDidChange(ev) {
 
-    this.currentPhotoIndex = this.slides.getActiveIndex();
-    //this.photoNumber = this.slides.getActiveIndex() + 1;
-    console.log("SlideDidChanged " + this.currentPhotoIndex);
-  }
+  //   this.currentPhotoIndex = this.slides.getActiveIndex();
+  //   //this.photoNumber = this.slides.getActiveIndex() + 1;
+  //   console.log("SlideDidChanged " + this.currentPhotoIndex);
+  // }
 
 
-  slideChanged(ev) {
+  slideChanged() {
     this.slides.getActiveIndex().then(index => {
+      this.waarisdatService.currentPhotoIndex = index;
       this.photoNumber = index + 1;
     });
   }
