@@ -4,6 +4,21 @@ import { NavController } from '@ionic/angular';
 import { LatLng } from "@ionic-native/google-maps";
 import { WaarisdatService } from "../service/waarisdat.service";
 
+import "../../../node_modules/@ionic/angular/css/core.css";
+
+// /* Basic CSS for apps built with Ionic */
+import "../../../node_modules/@ionic/angular/css/normalize.css";
+import "../../../node_modules/@ionic/angular/css/structure.css";
+import "../../../node_modules/@ionic/angular/css/typography.css";
+import '../../../node_modules/@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+import "../../../node_modules/@ionic/angular/css/padding.css";
+import "../../../node_modules/@ionic/angular/css/float-elements.css";
+import "../../../node_modules/@ionic/angular/css/text-alignment.css";
+import "../../../node_modules/@ionic/angular/css/text-transformation.css";
+import "../../../node_modules/@ionic/angular/css/flex-utils.css";
+
 declare var google;
 
 interface ScoreListItem {
@@ -19,6 +34,7 @@ export class FinishPage implements OnInit {
 
 
   feedItems = [];
+  totalScore: number = 0;
 
   constructor(public navCtrl: NavController, private router: Router, public waarisdatService: WaarisdatService) { }
 
@@ -28,7 +44,7 @@ export class FinishPage implements OnInit {
   ionViewWillEnter() {
     this.feedItems = [];
     let nPhotos: number = 0; //this.waarisdatService.markersGuess.length;
-    let totalScore: number = 0;
+
     for (var index in this.waarisdatService.markersGuess) {
 
       let guessMarker = this.waarisdatService.markersGuess[index];
@@ -43,20 +59,18 @@ export class FinishPage implements OnInit {
       }
       //var photoNumber: number = Number(index) + 1;
       var scoreListItem = {
-        score: "Foto #" + photoNumber + " afstand: " + distance + "m, score: " + score
+        photo: "assets/images/Waarisdit-00" + photoNumber + ".jpg",
+        photoNumber: photoNumber,
+        distance: distance,
+        score: score
       };
       this.feedItems.push(scoreListItem);
       console.log(scoreListItem.score);
       nPhotos += 1;
-      totalScore += score;
+      this.totalScore += score;
 
     }
-    totalScore = Math.round(totalScore / nPhotos);
-    var scoreListItem = {
-      score: "Totaal Score: " + totalScore.toString() + " van de 100"
-    };
-    this.feedItems.push(scoreListItem);
-    console.log(scoreListItem.score);
+    console.log("Totaal Score: " + this.totalScore.toString() + " van de 100");
 
   }
 

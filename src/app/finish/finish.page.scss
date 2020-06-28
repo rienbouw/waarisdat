@@ -1,19 +1,44 @@
-#list {
+ html {
     margin-top: 30px;
     text-align: left;
     font-size: 20px;
   }
 
-  #list h5 {
-    margin-left: 30px;
+   h2 {
+    font-size: 20px;
   }
-  #list ul {
+   ul {
     text-align: left;
     margin-top: 30px;
   }
 
-  #list ul li {
+   ul li {
     text-align: left;
     list-style: disc;
     margin: 10px 10px;
   }
+
+  .score {
+    font-weight: bold;
+  }
+  .item-right {
+    text-align: right;
+}
+
+  @import "~@ionic/angular/css/normalize.css";
+
+// /* Core CSS required for Ionic components to work properly */
+// @import "~../node_modules/@ionic/angular/css/core.css";
+
+// /* Basic CSS for apps built with Ionic */
+// @import "~@ionic/angular/css/normalize.css";
+// @import "~@ionic/angular/css/structure.css";
+// @import "~@ionic/angular/css/typography.css";
+// @import '~@ionic/angular/css/display.css';
+
+// /* Optional CSS utils that can be commented out */
+// @import "~@ionic/angular/css/padding.css";
+// @import "~@ionic/angular/css/float-elements.css";
+// @import "~@ionic/angular/css/text-alignment.css";
+// @import "~@ionic/angular/css/text-transformation.css";
+// @import "~@ionic/angular/css/flex-utils.css";

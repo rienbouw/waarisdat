@@ -111,10 +111,6 @@ export class PhotoPage {
   }
 
 
-  getDistanceBetween(p1, p2) {
-    return google.maps.geometry.spherical.computeDistanceBetween(p1, p2).toFixed(0);
-  }
-
   klaarButton() {
     this.router.navigate(['finish'])
   }

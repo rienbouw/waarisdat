@@ -8,13 +8,21 @@
 </ion-header>
 
 <ion-content>
-  <div id="list">
-    <h5>Score</h5>
-    <ion-list>
-      <ion-item *ngFor="let feed of feedItems">
-        <p>{{feed.score}}</p>
-      </ion-item>
-    </ion-list>
-  </div>
 
+  <h5>Score</h5>
+  <ion-list>
+    <ion-item *ngFor="let feed of feedItems">
+      <ion-thumbnail item-left>
+        <img *ngIf="feed.photo !='-'" src={{feed.photo}} />
+      </ion-thumbnail>
+      <ion-label class="item-right">
+        <ion-text>
+          <h2>Foto #{{feed.photoNumber}}</h2>
+          <p>Afstand tot de goede plek: {{feed.distance}} meter</p>
+          <p class="score">Score: {{feed.score}} punten</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <h1>Totaal Score: {{totalScore}}</h1>
 </ion-content>
