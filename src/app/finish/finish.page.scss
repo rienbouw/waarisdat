@@ -1,18 +1,13 @@
- html {
-    margin-top: 30px;
-    text-align: left;
-    font-size: 20px;
-  }
 
-   h2 {
+#body   h2 {
     font-size: 20px;
   }
-   ul {
+   #body ul {
     text-align: left;
     margin-top: 30px;
   }
 
-   ul li {
+  #body ul li {
     text-align: left;
     list-style: disc;
     margin: 10px 10px;
@@ -24,6 +19,8 @@
   .item-right {
     text-align: right;
 }
+
+
 
   @import "~@ionic/angular/css/normalize.css";
 

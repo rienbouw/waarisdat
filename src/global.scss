@@ -24,3 +24,28 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+// Set global styling here. RiB;
+
+#body {
+    margin-top: 0px;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+
+   #header {
+    margin-top: 0px;
+    font-size: 40px;
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+
+  .item ion-thumbnail {
+    min-width: 5rem;    
+    min-height: 5rem;
+    img {
+        max-width: 5rem;    
+        min-width: 5rem;
+    }
+}
