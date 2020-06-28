@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Waarisdat</ion-title>
+    <ion-button slot="end" (click)="restartButton()">
+      Opnieuw
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="list">
+    <h5>Score</h5>
+    <ion-list>
+      <ion-item *ngFor="let feed of feedItems">
+        <p>{{feed.score}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

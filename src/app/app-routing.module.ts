@@ -19,9 +19,8 @@ const routes: Routes = [
     loadChildren: () => import('./map/tab1.module').then(m => m.Tab1PageModule)
   },
   {
-    path: 'plkjlkjhoto',
-    redirectTo: '../../tabs/pxxhoto',
-    pathMatch: 'full'
+    path: 'finish',
+    loadChildren: () => import('./finish/finish.module').then(m => m.FinishPageModule)
   }
 ];
 @NgModule({

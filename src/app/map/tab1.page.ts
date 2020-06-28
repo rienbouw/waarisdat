@@ -62,21 +62,21 @@ export class MapPage implements OnInit {
     this.router.navigate(['photo'])
   }
 
-  mapReady(map) {
-    this.googleMap = map;
+  // mapReady(map) {
+  //   this.googleMap = map;
 
-    this.googleMap.addListener("dragend", function () {
+  //   this.googleMap.addListener("dragend", function () {
 
-    });
+  //   });
 
-    for (let i = 0; i < this.waarisdatService.markers.length; i++) {
-      console.log("aici")
-      new google.maps.Marker({
-        position: { lat: this.waarisdatService.markers[i].lat, lng: this.waarisdatService.markers[i].long },
-        map: map,
-      });
-    }
-  }
+  //   for (let i = 0; i < this.waarisdatService.markers.length; i++) {
+  //     console.log("aici")
+  //     new google.maps.Marker({
+  //       position: { lat: this.waarisdatService.markers[i].lat, lng: this.waarisdatService.markers[i].long },
+  //       map: map,
+  //     });
+  //   }
+  // }
 
   // placeMarker(position, map) {
   //   var marker = new google.maps.Marker({

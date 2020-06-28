@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Waarisdat</ion-title>
+
+    <ion-button slot="end" (click)="startButton()">
+      Start de quiz
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -17,7 +21,5 @@
       <li>Tik op Klaar als je de score wilt zien</li>
     </ul>
   </div>
-  <ion-button class="button button-block" (click)="startButton()">
-    Start de quiz
-  </ion-button>
+
 </ion-content>

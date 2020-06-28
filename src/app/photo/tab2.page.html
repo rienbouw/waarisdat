@@ -1,15 +1,16 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title color="primary">
+    <ion-title>
       Waarisdat
     </ion-title>
+    <ion-button slot="end" (click)="klaarButton()">
+      Klaar
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button class="button button-block" (click)="klaarButton()">
-    {{klaarButtonText}}
-  </ion-button>
+
   <div class="nummering">#{{photoNumber}}</div>
   <!--</div> van {{this.sliderOne.slidesItems.length}}</div>-->
   <div class="ion-padding">

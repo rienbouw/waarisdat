@@ -3,7 +3,7 @@
     <ion-title>
       Waarisdat
     </ion-title>
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-button (click)="backButton()">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
@@ -13,9 +13,9 @@
 
 <ion-content>
 
-  <!-- (dragEnd)="markerDragEnd(coords, $event)"(mapReady)="mapLoad($event)" -->
+  <!-- (dragEnd)="markerDragEnd(coords, $event)"(mapReady)="mapLoad($event)" (mapReady)="mapReady($event)"-->
   <agm-map #map [latitude]="lat" [longitude]="lng" [zoom]="14" [clickableIcons]="false"
-    (mapClick)="onMapClick($event.coords.lat, $event.coords.lng)" (mapReady)="mapReady($event)">
+    (mapClick)="onMapClick($event.coords.lat, $event.coords.lng)">
     <agm-marker *ngFor="let marker of this.waarisdatService.markers" [latitude]="marker.lat" [longitude]="marker.lng"
       [opacity]="marker.alpha" [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)"
       (dragEnd)="markerDragEnd(marker,$event.coords.lat, $event.coords.lng)" [markerDraggable]="true"></agm-marker>
