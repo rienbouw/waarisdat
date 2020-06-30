@@ -1,7 +1,7 @@
 <ion-header>
   <div id="header">
     <ion-toolbar>
-      <ion-title slot="start">Waarisdat</ion-title>
+      <ion-title mode=md class="start">Waarisdat</ion-title>
       <ion-button slot="end" (click)="klaarButton()">Klaar</ion-button>
     </ion-toolbar>
   </div>
@@ -13,7 +13,7 @@
   <!--</div> van {{this.sliderOne.slidesItems.length}}</div>-->
   <div class="ion-padding">
     <ion-slides pager="true" paginationType="fraction" [options]="slideOptsOne" zoom #slideWithNav
-      (ionSlideDidChange)=" slideChanged($event)">
+      (ionSlideDidChange)=" slideChanged()">
       <ion-slide (click)="onPhotoClick(i)" *ngFor="let s of sliderOne.slidesItems; let i=index">
         <div class="swiper-zoom-container"><img src="assets/images/Waarisdit-00{{s.id}}.jpg"></div>
       </ion-slide>
