@@ -12,8 +12,8 @@ import { throwError } from 'rxjs';
 export class FinishDetailPage implements OnInit {
 
   photoNumber = 1;
-  centerLat: number;
-  centerLng: number;
+  centerMarker: any;
+  guessMarker: any;
 
   constructor(
     private router: Router,
@@ -23,9 +23,34 @@ export class FinishDetailPage implements OnInit {
 
   ngOnInit() {
     this.photoNumber = this.waarisdatService.currentPhotoIndex + 1;
-    console.log(this.waarisdatService.markersGuess[this.photoNumber - 1]);
-    this.centerLat = this.waarisdatService.markersGuess[this.photoNumber - 1]["lat"];
-    this.centerLng = this.waarisdatService.markersGuess[this.photoNumber - 1]["lng"];
+
+    this.centerMarker = {
+      lat: this.waarisdatService.markersCorrect[this.photoNumber - 1].lat(),
+      lng: this.waarisdatService.markersCorrect[this.photoNumber - 1].lng(),
+      alpha: 1,
+      icon: {
+        url: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|f5f242|000000',
+        scaledSize: {
+          width: 30,
+          height: 40
+        }
+      },
+      photoNumber: this.waarisdatService.currentPhotoIndex + 1
+    };
+
+    this.guessMarker = {
+      lat: this.waarisdatService.markersGuess[this.photoNumber - 1]["lat"],
+      lng: this.waarisdatService.markersGuess[this.photoNumber - 1]["lng"],
+      alpha: 1,
+      icon: {
+        url: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|f5f242|000000',
+        scaledSize: {
+          width: 30,
+          height: 40
+        }
+      },
+      photoNumber: this.waarisdatService.currentPhotoIndex + 1
+    };
   }
 
   ionViewWillEnter() {

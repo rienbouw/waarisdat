@@ -24,11 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'finish-detail',
-    loadChildren: () => import('./finish-detail/finish-detail.module').then( m => m.FinishDetailPageModule)
-  },
-  {
-    path: 'finish-detail-map',
-    loadChildren: () => import('./finish-detail-map/finish-detail-map.module').then( m => m.FinishDetailMapPageModule)
+    loadChildren: () => import('./finish-detail/finish-detail.module').then(m => m.FinishDetailPageModule)
   }
 ];
 @NgModule({

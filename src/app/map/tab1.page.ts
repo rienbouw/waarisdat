@@ -93,12 +93,12 @@ export class MapPage implements OnInit {
 
   getCurrentLocation() {
     Plugins.Geolocation.getCurrentPosition().then(result => {
-      this.lat = result.coords.latitude;
-      this.lng = result.coords.longitude;
+      this.centerLat = result.coords.latitude;
+      this.centerLng = result.coords.longitude;
 
       //  calling getAddress function to decode the address
 
-      this.getAddress(this.lat, this.lng).subscribe(decodedAddress => {
+      this.getAddress(this.centerLat, this.centerLng).subscribe(decodedAddress => {
         this.address = decodedAddress;
         //console.log("getCurrentLocation: " + this.address);
       });
