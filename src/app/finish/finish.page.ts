@@ -41,6 +41,11 @@ export class FinishPage implements OnInit {
   ngOnInit() {
   }
 
+  finishDetail(feed: any) {
+    this.waarisdatService.currentPhotoIndex = feed.photoNumber - 1;
+    this.router.navigate(['finish-detail']);
+  }
+
   ionViewWillEnter() {
     this.feedItems = [];
     let nPhotos: number = 0; //this.waarisdatService.markersGuess.length;

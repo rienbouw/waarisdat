@@ -11,9 +11,11 @@
 
 <ion-content>
 
-  <!-- (dragEnd)="markerDragEnd(coords, $event)"(mapReady)="mapLoad($event)" (mapReady)="mapReady($event)"-->
-  <agm-map #map [latitude]="centerLat" [longitude]="centerLng" [zoom]="14" [clickableIcons]="false"
-    (mapClick)="onMapClick($event.coords.lat, $event.coords.lng)">
+  <div id="body">
+    <h1>#{{photoNumber}}</h1>
+    <p class="finish-detailxx"><img height="200" src="assets/images/Waarisdit-00{{photoNumber}}.jpg"></p>
+  </div>
+  <agm-map #map [latitude]="centerLat" [longitude]="centerLng" [zoom]="14" [clickableIcons]="false">
     <agm-marker *ngFor="let marker of this.waarisdatService.markers" [latitude]="marker.lat" [longitude]="marker.lng"
       [opacity]="marker.alpha" [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)"
       (dragEnd)="markerDragEnd(marker,$event.coords.lat, $event.coords.lng)" [markerDraggable]="true"></agm-marker>

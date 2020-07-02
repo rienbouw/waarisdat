@@ -19,8 +19,8 @@ declare var google;
   styleUrls: ["tab1.page.scss"]
 })
 export class MapPage implements OnInit {
-  lat: number;
-  lng: number;
+  centerLat: number;
+  centerLng: number;
 
   newMarker;
   address: string;
@@ -35,7 +35,9 @@ export class MapPage implements OnInit {
 
   ngOnInit() {
     console.log("ngOnInit map");
-    this.getCurrentLocation();
+    this.centerLat = 52.09067047478424;
+    this.centerLng = 5.120769093002053;
+    //this.getCurrentLocation();
 
     // this.googleMap.addListener('click', function (e) {
     //   this.placeMarker(e.latLng, this.googleMap);

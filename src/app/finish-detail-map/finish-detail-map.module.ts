@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FinishPageRoutingModule } from './finish-routing.module';
+import { FinishDetailMapPageRoutingModule } from './finish-detail-map-routing.module';
 
-import { FinishPage } from './finish.page';
+import { FinishDetailMapPage } from './finish-detail-map.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FinishPageRoutingModule
+    FinishDetailMapPageRoutingModule
   ],
-  declarations: [FinishPage]
+  declarations: [FinishDetailMapPage]
 })
-export class FinishPageModule { }
+export class FinishDetailMapPageModule {}
