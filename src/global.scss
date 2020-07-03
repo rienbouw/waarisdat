@@ -59,5 +59,20 @@
 .finish-detail {
     text-align: center;
 }
+.rounded {
+  margin-left:20px;  
+}
 
-
+ion-input{
+  margin-left: 5px; 
+  border-radius: 10px !important;
+  padding-left:10px;
+  padding-right: 30px;
+  font-size: 0.9em;
+  border: 1px solid #f1f1f1 !important;
+  --background: rgb(241, 239, 239) !important;
+  /* height: 10%; */
+  /* width: 41%; */
+  max-width: 50vw; // this is applying perfectly
+  max-height: 10vh;
+}

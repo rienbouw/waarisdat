@@ -8,5 +8,6 @@ export class WaarisdatService {
   markersCorrect = [];
   markersGuess = [];
   markers = [];
+  userName: string = "";
   constructor() { }
 }

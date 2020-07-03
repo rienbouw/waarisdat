@@ -5,6 +5,7 @@ import { LatLng } from "@ionic-native/google-maps";
 import { WaarisdatService } from "../service/waarisdat.service";
 import { FirebaseService } from '../service/firebase.service';
 import "../../../node_modules/@ionic/angular/css/core.css";
+import { formatDate } from '@angular/common';
 
 // /* Basic CSS for apps built with Ionic */
 import "../../../node_modules/@ionic/angular/css/normalize.css";
@@ -80,9 +81,10 @@ export class FinishPage implements OnInit {
 
     }
     console.log("Totaal Score: " + this.totalScore.toString() + " van de 100");
-
+    var currentDate = new Date();
+    const title = this.waarisdatService.userName + ' ' + formatDate(currentDate, 'yyyy-MM-dd hh:mm', 'en-US');
     let data = {
-      title: "rien",
+      title: title,
       description: "Totaal Score: " + this.totalScore.toString() + " van de 100",
       image: null
     }

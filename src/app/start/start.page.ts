@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthService } from '../service/auth.service';
+import { WaarisdatService } from "../service/waarisdat.service";
 
 @Component({
   selector: 'app-start',
@@ -10,7 +11,9 @@ import { AuthService } from '../service/auth.service';
 })
 export class StartPage implements OnInit {
 
-  constructor(public navCtrl: NavController, private router: Router, private authService: AuthService) { }
+  userName: string = "";
+
+  constructor(public navCtrl: NavController, private router: Router, private authService: AuthService, public waarisdatService: WaarisdatService) { }
 
   ngOnInit() {
   }
@@ -24,6 +27,7 @@ export class StartPage implements OnInit {
 
     this.authService.doLogin(up)
       .then(res => {
+        this.waarisdatService.userName = this.userName;
         this.router.navigate(["photo"]);
       }, err => {
 
