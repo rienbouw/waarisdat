@@ -22,15 +22,14 @@ export class StartPage implements OnInit {
       password: "adka12"
     }
 
-    // this.authService.doLogin(up)
-    //   .then(res => {
-    //     this.router.navigate(["/home"]);
-    //   }, err => {
+    this.authService.doLogin(up)
+      .then(res => {
+        this.router.navigate(["photo"]);
+      }, err => {
 
-    //     console.log(err)
-    //   })
+        console.log(err)
+      })
 
 
-    this.router.navigate(['photo']);
   }
 }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { LatLng } from "@ionic-native/google-maps";
 import { WaarisdatService } from "../service/waarisdat.service";
-
+import { FirebaseService } from '../service/firebase.service';
 import "../../../node_modules/@ionic/angular/css/core.css";
 
 // /* Basic CSS for apps built with Ionic */
@@ -36,7 +36,11 @@ export class FinishPage implements OnInit {
   feedItems = [];
   totalScore: number = 0;
 
-  constructor(public navCtrl: NavController, private router: Router, public waarisdatService: WaarisdatService) { }
+  constructor(
+    public navCtrl: NavController,
+    private router: Router,
+    public waarisdatService: WaarisdatService,
+    private firebaseService: FirebaseService) { }
 
   ngOnInit() {
   }
@@ -76,6 +80,18 @@ export class FinishPage implements OnInit {
 
     }
     console.log("Totaal Score: " + this.totalScore.toString() + " van de 100");
+
+    let data = {
+      title: "rien",
+      description: "Totaal Score: " + this.totalScore.toString() + " van de 100",
+      image: null
+    }
+    this.firebaseService.createTask(data)
+      .then(
+        res => {
+          console.log(res);
+        }
+      )
 
   }
 
