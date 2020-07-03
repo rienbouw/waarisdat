@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../ionic-firebase-starter-app"
+		}
+	],
+	"settings": {}
+}
