@@ -1,22 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title mode=md class="start">Waarisdat</ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-button (click)="backButton()">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
 
   <div id="body">
-    <h1>#{{photoNumber}}</h1>
+    <h1>Foto #{{photoNumber}}</h1>
     <p class="finish-detailxx"><img height="200" src="assets/images/Waarisdit-00{{photoNumber}}.jpg"></p>
   </div>
-  <agm-map #map [latitude]="centerMarker.lat" [longitude]="centerMarker.lng" [zoom]="13" [clickableIcons]="false">
-    <agm-marker [latitude]="guessMarker.lat" [longitude]="guessMarker.lng" [iconUrl]="guessMarker.icon"> </agm-marker>
-    <agm-marker [latitude]="centerMarker.lat" [longitude]="centerMarker.lng"></agm-marker>
+  <agm-map #map [fitBounds]="true" [latitude]="centerMarker.lat" [longitude]="centerMarker.lng" [zoom]="13"
+    [clickableIcons]="false">
+    <agm-marker [agmFitBounds]="true" [latitude]="guessMarker.lat" [longitude]="guessMarker.lng"
+      [iconUrl]="guessMarker.icon"> </agm-marker>
+    <agm-marker [agmFitBounds]="true" [latitude]="centerMarker.lat" [longitude]="centerMarker.lng"></agm-marker>
+    <agm-polyline [strokeColor]="'red'">
+      <agm-polyline-point *ngFor="let data of lines" [latitude]="data.lat" [longitude]="data.lng">
+      </agm-polyline-point>
+    </agm-polyline>
+
   </agm-map>
 </ion-content>

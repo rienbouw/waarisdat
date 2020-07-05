@@ -14,6 +14,7 @@ export class FinishDetailPage implements OnInit {
   photoNumber = 1;
   centerMarker: any;
   guessMarker: any;
+  public lines = [];
 
   constructor(
     private router: Router,
@@ -51,6 +52,16 @@ export class FinishDetailPage implements OnInit {
       },
       photoNumber: this.waarisdatService.currentPhotoIndex + 1
     };
+
+    this.lines.push({
+      lat: this.waarisdatService.markersCorrect[this.photoNumber - 1].lat(),
+      lng: this.waarisdatService.markersCorrect[this.photoNumber - 1].lng()
+    });
+
+    this.lines.push({
+      lat: this.waarisdatService.markersGuess[this.photoNumber - 1]["lat"],
+      lng: this.waarisdatService.markersGuess[this.photoNumber - 1]["lng"]
+    });
   }
 
   ionViewWillEnter() {

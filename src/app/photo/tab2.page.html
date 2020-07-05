@@ -1,10 +1,7 @@
 <ion-header>
-  <div id="header">
-    <ion-toolbar>
-      <ion-title mode=md class="start">Waarisdat</ion-title>
-      <ion-button slot="end" (click)="klaarButton()">Klaar</ion-button>
-    </ion-toolbar>
-  </div>
+  <ion-toolbar>
+    <ion-title mode=ios>Waarisdat</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -19,6 +16,10 @@
       </ion-slide>
     </ion-slides>
   </div>
-
+  <ion-list style="text-align:center">
+    <ion-button slot="end" (click)="klaarButton()">
+      Klaar
+    </ion-button>
+  </ion-list>
 
 </ion-content>

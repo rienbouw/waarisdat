@@ -1,12 +1,8 @@
 <ion-header>
-  <div id="header">
-    <ion-toolbar>
-      <ion-title mode=md class="start">Waarisdat</ion-title>
-      <ion-button slot="end" (click)="restartButton()">
-        Opnieuw
-      </ion-button>
-    </ion-toolbar>
-  </div>
+  <ion-toolbar>
+    <ion-title mode=ios>Score</ion-title>
+
+  </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-content">
@@ -27,5 +23,11 @@
       </ion-item>
     </ion-list>
     <h1>Totaal Score: {{totalScore}} punten</h1>
+    <ion-list style="text-align:center">
+      <ion-button slot="end" (click)="restartButton()">
+        Opnieuw
+      </ion-button>
+    </ion-list>
+
   </div>
 </ion-content>

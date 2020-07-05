@@ -1,16 +1,20 @@
 <ion-header>
-  <div id="header">
-    <ion-toolbar>
-      <div text-left>
-        <ion-title mode=md class="start">Waarisdat</ion-title>
-      </div>
-
-    </ion-toolbar>
-  </div>
+  <ion-toolbar>
+    <ion-title mode=ios>Waarisdat</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div id="body">
+    <ion-item class="rounded">
+      <ion-label fixed>Spelers Naam : </ion-label>
+      <ion-input [(ngModel)]="userName" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-list style="text-align:center">
+      <ion-button slot="end" (click)="startButton()">
+        Start
+      </ion-button>
+    </ion-list>
     <h5>Speel de quiz als volgt:</h5>
     <ul>
       <li>Tik op <b>Start</b></li>
@@ -22,16 +26,9 @@
       <li>Je kunt de pinnetjes op de kaart nog verslepen</li>
       <li>Tik op <b>Klaar</b> als je de score wilt zien</li>
     </ul>
-    <ion-item class="rounded">
-      <ion-label fixed>Spelers Naam : </ion-label>
-      <ion-input [(ngModel)]="userName" type="text" value=""></ion-input>
-    </ion-item>
 
-    <ion-list style="text-align:center">
-      <ion-button slot="end" (click)="startButton()">
-        Start
-      </ion-button>
-    </ion-list>
+
+
 
   </div>
 
