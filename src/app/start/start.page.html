@@ -8,21 +8,22 @@
   <div id="body">
     <ion-item class="rounded">
       <ion-label fixed>Spelers Naam : </ion-label>
-      <ion-input [(ngModel)]="userName" type="text" value=""></ion-input>
+      <ion-input [(ngModel)]="userName" type="text" value="" (ionChange)="userNameInput()"></ion-input>
     </ion-item>
     <ion-list style="text-align:center">
-      <ion-button slot="end" (click)="startButton()">
+      <ion-button [disabled]="startButtonDisabled" slot="end" (click)="startButton()">
         Start
       </ion-button>
     </ion-list>
     <h5>Speel de quiz als volgt:</h5>
     <ul>
+      <li>Vul je Spelers Naam in</li>
       <li>Tik op <b>Start</b></li>
-      <li>Tik op een foto</li>
+      <li>Tik op de <b>Kaart</b> knop</li>
       <li>Tik op de kaart waar je denkt dat de foto gemaakt is</li>
-      <li>Ga terug naar de foto tab</li>
+      <li>Tik op het terug pijltje</li>
       <li>Blader door de foto's door te swipen</li>
-      <li>Tik op de foto.. enzovoort</li>
+      <li>Tik op de Kaart knop.. enzovoort</li>
       <li>Je kunt de pinnetjes op de kaart nog verslepen</li>
       <li>Tik op <b>Klaar</b> als je de score wilt zien</li>
     </ul>

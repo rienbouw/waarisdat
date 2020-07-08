@@ -1,9 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { WaarisdatService } from "../service/waarisdat.service";
 import { IonSlides } from '@ionic/angular';
+import { ZoomControlStyle } from '@agm/core';
 //import { } from '@types/googlemaps';
 
 declare var google;
@@ -16,6 +17,7 @@ declare var google;
 export class PhotoPage {
 
   @ViewChild(IonSlides) slides: IonSlides;
+  @ViewChild('slideWithNav', { read: ElementRef }) slider: ElementRef;
 
   slideOptsOne = {
     zoom: {
@@ -70,10 +72,16 @@ export class PhotoPage {
     console.log("ngOnInit photo"); //enable the loggen, and this page will be initialized each time it is navigated to!!!!!
   }
 
-  onPhotoClick(params: any) {
+  onPhotoClick() {
+
+    this.slider.nativeElement.getActiveIndex().then(index => {
+      this.waarisdatService.currentPhotoIndex = index;
+    });
     //this.slides.lockSwipeToNext(true);
-    this.waarisdatService.currentPhotoIndex = params;
+    //this.waarisdatService.currentPhotoIndex = params;
     //console.log("onPhotoClick: currentPhotoIndex " + this.waarisdatService.currentPhotoIndex); //enable this line and ngOninit is called on map page!!!!!!!!!!!!
+    let zoom = this.slider.nativeElement.swiper.zoom;
+    zoom.out();
     this.router.navigate(['map'])
 
   }

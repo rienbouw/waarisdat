@@ -10,4 +10,12 @@ export class WaarisdatService {
   markers = [];
   userName: string = "";
   constructor() { }
+
+  reset() {
+    this.currentPhotoIndex = 0;
+    this.markersCorrect = [];
+    this.markersGuess = [];
+    this.markers = [];
+    this.userName = "";
+  }
 }

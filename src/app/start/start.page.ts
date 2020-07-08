@@ -12,10 +12,16 @@ import { WaarisdatService } from "../service/waarisdat.service";
 export class StartPage implements OnInit {
 
   userName: string = "";
+  startButtonDisabled: boolean = true;
 
   constructor(public navCtrl: NavController, private router: Router, private authService: AuthService, public waarisdatService: WaarisdatService) { }
 
   ngOnInit() {
+  }
+
+  userNameInput() {
+    console.log("sdsf");
+    this.startButtonDisabled = false;
   }
 
   startButton() {
@@ -27,6 +33,7 @@ export class StartPage implements OnInit {
 
     this.authService.doLogin(up)
       .then(res => {
+        this.waarisdatService.reset();
         this.waarisdatService.userName = this.userName;
         this.router.navigate(["photo"]);
       }, err => {

@@ -5,21 +5,34 @@
 </ion-header>
 
 <ion-content>
-
-  <div class="nummering">#{{photoNumber}}</div>
+  <ion-row>
+    <ion-col>
+      <ion-button class="button-outline" (click)="onPhotoClick()">
+        <ion-icon name="location-outline"></ion-icon>&nbsp;Kaart
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <div class="nummering">Foto #{{photoNumber}}</div>
+    </ion-col>
+    <ion-col class="ion-text-right">
+      <ion-button class="button-outline" (click)="klaarButton()">
+        <ion-icon name="trophy-outline"></ion-icon>
+        &nbsp;Klaar
+      </ion-button>
+    </ion-col>
+  </ion-row>
   <!--</div> van {{this.sliderOne.slidesItems.length}}</div>-->
   <div class="ion-padding">
     <ion-slides pager="true" paginationType="fraction" [options]="slideOptsOne" zoom #slideWithNav
       (ionSlideDidChange)=" slideChanged()">
-      <ion-slide (click)="onPhotoClick(i)" *ngFor="let s of sliderOne.slidesItems; let i=index">
+      <ion-slide (click)="onPhotoClick()" *ngFor="let s of sliderOne.slidesItems; let i=index">
         <div class="swiper-zoom-container"><img src="assets/images/Waarisdit-00{{s.id}}.jpg"></div>
       </ion-slide>
     </ion-slides>
   </div>
   <ion-list style="text-align:center">
-    <ion-button slot="end" (click)="klaarButton()">
-      Klaar
-    </ion-button>
+
+
   </ion-list>
 
 </ion-content>

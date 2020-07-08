@@ -91,7 +91,6 @@ export class FinishPage implements OnInit {
     this.firebaseService.createTask(data)
       .then(
         res => {
-          console.log(res);
         }
       )
 
