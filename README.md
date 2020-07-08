@@ -17,5 +17,7 @@ Keywords:
 - Drag Markers
 - Show current geolocation as the blue circle 
 - Compute distance between Markers
+- Draw line between two markers
 - Photo slider
 - Share data between pages through Service Provider
+- Store data in Firebase
