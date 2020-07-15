@@ -14,13 +14,18 @@ export class StartPage implements OnInit {
   userName: string = "";
   startButtonDisabled: boolean = true;
 
-  constructor(public navCtrl: NavController, private router: Router, private authService: AuthService, public waarisdatService: WaarisdatService) { }
+  constructor(
+    public navCtrl: NavController,
+    private router: Router,
+    private authService: AuthService,
+    public waarisdatService: WaarisdatService) {
+
+  }
 
   ngOnInit() {
   }
 
   userNameInput() {
-    console.log("sdsf");
     this.startButtonDisabled = false;
   }
 
@@ -43,4 +48,5 @@ export class StartPage implements OnInit {
 
 
   }
+
 }

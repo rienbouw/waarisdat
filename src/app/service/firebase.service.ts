@@ -16,6 +16,21 @@ export class FirebaseService {
     public afAuth: AngularFireAuth
   ) { }
 
+  createPhoto(value) {
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection(`photos/${value.uid}`).add({
+        name: value.name,
+        level: value.level,
+        number: value.number,
+        img: value.img,
+        uid: value.uid,
+        lat: value.lat,
+        lng: value.lng,
+        date: Date.now()
+      });
+    });
+  }
+
   getTasks() {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.user.subscribe(currentUser => {

@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'finish-detail',
     loadChildren: () => import('./finish-detail/finish-detail.module').then(m => m.FinishDetailPageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
   }
 ];
 @NgModule({
