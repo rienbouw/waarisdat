@@ -16,18 +16,23 @@ export class FirebaseService {
     public afAuth: AngularFireAuth
   ) { }
 
-  createPhoto(value) {
+  createPhotoMetadata(value) {
+    console.log("Save photo metadata for " + value.uid);
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection(`photos/${value.uid}`).add({
+      this.afs.collection(`photo/${value.uid}/metadata`).add({
         name: value.name,
         level: value.level,
-        number: value.number,
+        //number: value.number,
         img: value.img,
         uid: value.uid,
-        lat: value.lat,
-        lng: value.lng,
+        //   lat: value.lat,
+        //  lng: value.lng,
         date: Date.now()
-      });
+      })
+        .then(
+          res => resolve(res),
+          err => reject(err)
+        )
     });
   }
 

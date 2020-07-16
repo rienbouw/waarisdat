@@ -17,7 +17,7 @@ export class AdminPage implements OnInit {
   id: any;
   uid: string;
   name: any;
-  phone: string;
+  level: string;
   adress: string;
   img: any;
   mail: string;
@@ -66,9 +66,9 @@ export class AdminPage implements OnInit {
   onUpload(e) {
     console.log(e.target.files[0]);
 
-    const id = Math.random().toString(36).substring(2);
+    this.uid = Math.random().toString(36).substring(2);
     const file = e.target.files[0];
-    const filePath = `photo/${id}`;
+    const filePath = `photo/${this.uid}`;
     const ref = this.afs.ref(filePath);
     const task = this.afs.upload(filePath, file);
     this.uploadPercent = task.percentageChanges();
@@ -77,40 +77,36 @@ export class AdminPage implements OnInit {
   }
 
 
-  save(name, phone, adress, username) {
-    console.log(this.cp);
+  save(name, level, adress, username) {
     const image = this.inputimageProd.nativeElement.value;
     const data = {
       name: name,
-      level: phone,
+      level: level,
       mail: this.mail,
       img: image || this.img,
-      adress: adress,
-      uid: this.uid,
-      username: username || 'null'
+      uid: this.uid
     };
     console.log(data);
-    if (this.cp === false) {
-      this.firebaseService.createPhoto(data).then(
-        res => {
-          console.log('Upload' + res);
-        });
-    }
+    this.firebaseService.createPhotoMetadata(data).then(
+      res => {
+        console.log('Upload' + res);
+      });
 
   }
 
 
   async presentLoading() {
     const loading = await this.loadingController.create({
-      message: 'Loading image',
+      message: 'Foto wordt opgeslagen..',
       duration: 2000
     });
     await loading.present();
 
     const { role, data } = await loading.onDidDismiss();
 
-    console.log('Loading dismissed!');
+    //console.log('Loading dismissed!');
   }
+
   moveFocus(nextElement) {
     nextElement.setFocus();
   }
