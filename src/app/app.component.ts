@@ -30,7 +30,7 @@ export class AppComponent {
 
     this.platform.ready().then(() => {
       this.afAuth.user.subscribe(user => {
-        console.log("subscribe " + user);
+        //console.log("subscribe " + user);
         //this.router.navigate(["/start"]);
         //document.body.setAttribute('data-theme', 'dark');
 

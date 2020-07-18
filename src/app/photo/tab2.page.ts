@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { WaarisdatService } from "../service/waarisdat.service";
 import { IonSlides } from '@ionic/angular';
 import { ZoomControlStyle } from '@agm/core';
+import { PhotoMetadata } from '../service/waarisdat.service';
+import { Observable } from 'rxjs';
 //import { } from '@types/googlemaps';
 
 declare var google;
@@ -15,7 +17,6 @@ declare var google;
   styleUrls: ['tab2.page.scss']
 })
 export class PhotoPage {
-
   @ViewChild(IonSlides) slides: IonSlides;
   @ViewChild('slideWithNav', { read: ElementRef }) slider: ElementRef;
 
@@ -29,6 +30,7 @@ export class PhotoPage {
   klaarButtonText = "KLAAR! Laat mij de score zien.";
   photoNumber = 1;
   firstView: boolean;
+  private photoMetadataList: Observable<PhotoMetadata[]>;
 
   // slideChanged = ev => {
   //   console.log(ev);
@@ -69,7 +71,8 @@ export class PhotoPage {
   }
 
   ngOnInit() {
-    console.log("ngOnInit photo"); //enable the loggen, and this page will be initialized each time it is navigated to!!!!!
+    console.log("ngOnInit photo"); //enable the log, and this page will be initialized each time it is navigated to!!!!!
+    this.getPhotos();
   }
 
   onPhotoClick() {
@@ -88,6 +91,7 @@ export class PhotoPage {
 
   ionViewWillEnter() {
     if (this.firstView) {
+      console.log("firstView");
       this.firstView = false;
     } else {
       if (this.waarisdatService.currentPhotoIndex == this.sliderOne.slidesItems.length - 1) {
@@ -97,6 +101,11 @@ export class PhotoPage {
       }
     }
     this.slideChanged();
+  }
+
+  getPhotos() {
+    this.photoMetadataList = this.waarisdatService.getPhotoMetadataList();
+    console.log("getPhotos(): " + this.photoMetadataList);
   }
 
   get_CurrentPhotoIndex() {

@@ -6,6 +6,7 @@ import { LoadingController } from '@ionic/angular';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FirebaseService } from '../service/firebase.service';
+import { PhotoMetadata } from '../service/waarisdat.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -19,7 +20,7 @@ export class AdminPage implements OnInit {
   name: any;
   level: string;
   adress: string;
-  img: any;
+  img: string;
   mail: string;
   uploadPercent: Observable<number>;
   urlImage: Observable<string>;
@@ -79,15 +80,16 @@ export class AdminPage implements OnInit {
 
   save(name, level, adress, username) {
     const image = this.inputimageProd.nativeElement.value;
-    const data = {
+    const data: PhotoMetadata = {
       name: name,
       level: level,
-      mail: this.mail,
-      img: image || this.img,
-      uid: this.uid
+      imgUrl: image || this.img,
+      description: "",
+      uid: this.uid,
+      date: new Date()
     };
     console.log(data);
-    this.firebaseService.createPhotoMetadata(data).then(
+    this.firebaseService.addPhotoMetadata(data).then(
       res => {
         console.log('Upload' + res);
       });

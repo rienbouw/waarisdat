@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { map } from "rxjs/operators";
+import { Observable } from 'rxjs';
+import { PhotoMetadata } from '../service/waarisdat.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +14,24 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class FirebaseService {
 
   private snapshotChangesSubscription: any;
+  private photoMetadataList: Observable<PhotoMetadata[]>;
+  private photoMetadataCollection: AngularFirestoreCollection<PhotoMetadata>;
+
 
   constructor(
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth
-  ) { }
+  ) {
 
-  createPhotoMetadata(value) {
-    console.log("Save photo metadata for " + value.uid);
+  }
+
+  addPhotoMetadata(photoMetadata: PhotoMetadata): Promise<DocumentReference> {
+    console.log("Save photo metadata for " + photoMetadata.uid);
+    return this.photoMetadataCollection.add(photoMetadata);
+  }
+
+  reatePhotoMetadata(value) {
+
     return new Promise<any>((resolve, reject) => {
       this.afs.collection(`photo/${value.uid}/metadata`).add({
         name: value.name,
@@ -34,6 +48,20 @@ export class FirebaseService {
           err => reject(err)
         )
     });
+  }
+
+  getPhotoMetadataList(): Observable<PhotoMetadata[]> {
+    this.photoMetadataCollection = this.afs.collection<PhotoMetadata>('photoMetadata');
+    this.photoMetadataList = this.photoMetadataCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.photoMetadataList;
   }
 
   getTasks() {
