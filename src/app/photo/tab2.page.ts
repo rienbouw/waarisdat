@@ -27,10 +27,10 @@ export class PhotoPage {
   };
   public sliderOne: any;
   currentPhotoIndex;
-  klaarButtonText = "KLAAR! Laat mij de score zien.";
+  //klaarButtonText = "KLAAR! Laat mij de score zien.";
   photoNumber = 1;
   firstView: boolean;
-  private photoMetadataList: Observable<PhotoMetadata[]>;
+  private photoMetadataList: Array<PhotoMetadata>;
 
   // slideChanged = ev => {
   //   console.log(ev);
@@ -43,28 +43,6 @@ export class PhotoPage {
     public waarisdatService: WaarisdatService
   ) {
 
-    this.sliderOne =
-    {
-      isBeginningSlide: true,
-      isEndSlide: false,
-      slidesItems: [
-        {
-          id: 1
-        },
-        {
-          id: 2
-        },
-        {
-          id: 3
-        },
-        {
-          id: 4
-        },
-        {
-          id: 5
-        }
-      ]
-    };
 
 
     this.firstView = true;
@@ -72,8 +50,18 @@ export class PhotoPage {
 
   ngOnInit() {
     console.log("ngOnInit photo"); //enable the log, and this page will be initialized each time it is navigated to!!!!!
+
+    this.sliderOne =
+    {
+      isBeginningSlide: true,
+      isEndSlide: false,
+      slidesItems: []
+    };
+
     this.getPhotos();
+
   }
+
 
   onPhotoClick() {
 
@@ -105,7 +93,11 @@ export class PhotoPage {
 
   getPhotos() {
     this.photoMetadataList = this.waarisdatService.getPhotoMetadataList();
-    console.log("getPhotos(): " + this.photoMetadataList);
+    console.log("Aantal foto's: " + this.photoMetadataList.length);
+    for (var index in this.photoMetadataList) {
+      var pmd = this.photoMetadataList[index];
+      this.sliderOne.slidesItems.push({ id: 1, imgUrl: pmd.imgUrl });
+    }
   }
 
   get_CurrentPhotoIndex() {

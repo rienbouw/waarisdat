@@ -34,7 +34,7 @@ export class WaarisdatService {
     this.userName = "";
   }
 
-  getPhotoMetadataList(): Observable<PhotoMetadata[]> {
+  getPhotoMetadataList() {
     return this.firebaseService.getPhotoMetadataList();
   }
 }

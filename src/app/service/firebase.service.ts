@@ -14,7 +14,7 @@ import { PhotoMetadata } from '../service/waarisdat.service';
 export class FirebaseService {
 
   private snapshotChangesSubscription: any;
-  private photoMetadataList: Observable<PhotoMetadata[]>;
+  private photoMetadataList: Array<PhotoMetadata>;
   private photoMetadataCollection: AngularFirestoreCollection<PhotoMetadata>;
 
 
@@ -22,7 +22,16 @@ export class FirebaseService {
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth
   ) {
+    this.photoMetadataCollection = this.afs.collection<PhotoMetadata>('photoMetadata');
 
+    this.photoMetadataCollection.snapshotChanges().subscribe(
+      data => {
+        this.photoMetadataList = data.map(a => {
+          const pmd = a.payload.doc.data() as PhotoMetadata;
+          console.log(pmd);
+          return pmd;
+        })
+      });
   }
 
   addPhotoMetadata(photoMetadata: PhotoMetadata): Promise<DocumentReference> {
@@ -50,17 +59,8 @@ export class FirebaseService {
     });
   }
 
-  getPhotoMetadataList(): Observable<PhotoMetadata[]> {
-    this.photoMetadataCollection = this.afs.collection<PhotoMetadata>('photoMetadata');
-    this.photoMetadataList = this.photoMetadataCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
+  getPhotoMetadataList() {
+    console.log("getPhotoMetadataList()");
     return this.photoMetadataList;
   }
 

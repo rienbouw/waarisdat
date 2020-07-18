@@ -26,10 +26,10 @@
     <ion-slides pager="true" paginationType="fraction" [options]="slideOptsOne" zoom #slideWithNav
       (ionSlideDidChange)=" slideChanged()">
       <ion-slide (click)="onPhotoClick()" *ngFor="let s of sliderOne.slidesItems; let i=index">
-        <div class="swiper-zoom-container"><img
-            src="https://firebasestorage.googleapis.com/v0/b/easygeo.appspot.com/o/photo%2Fezvyg9mpfnl?alt=media&token=f064ec8c-5a17-4702-84e7-acfe9b4228d9" />
+        <div class="swiper-zoom-container"><img src={{s.imgUrl}} />
         </div>
-        <!--"assets/images/Waarisdit-00{{s.id}}.jpg"> -->
+        <!--src="https://firebasestorage.googleapis.com/v0/b/easygeo.appspot.com/o/photo%2Fezvyg9mpfnl?alt=media&token=f064ec8c-5a17-4702-84e7-acfe9b4228d9" /> 
+          "assets/images/Waarisdit-00{{s.id}}.jpg"> -->
       </ion-slide>
     </ion-slides>
   </div>
