@@ -12,12 +12,12 @@
   <div class="form">
 
     <div text-center>
-      <img *ngIf="img && !urlImage" src="{{img}}" class="circle">
-      <img *ngIf="urlImage" [src]="urlImage | async" class="circle">
+      <img *ngIf="img && !urlImage" src="{{img}}" class="circle" (load)="loaded($event)">
+      <img *ngIf="urlImage" [src]="urlImage | async" class="circle" (load)="loaded($event)">
 
       <br>
       <br>
-      <img *ngIf="!urlImage && !img" src="assets/user.svg" width="200px"> <br>
+      <img *ngIf="!urlImage && !img" src="assets/user.svg" width="200px" (load)="loaded($event)"> <br>
     </div>
 
 
@@ -34,16 +34,16 @@
 
     <br>
     <ion-item margin-bottom margin-bottom>
-      <ion-input (keyup.enter)="moveFocus(c)" type="text" #b placeholder="Name" [(ngModel)]="name"></ion-input>
+      <ion-input #c (keyup.enter)="moveFocus(c)" type="text" #b placeholder="Name" [(ngModel)]="name"></ion-input>
     </ion-item>
     <ion-item margin-bottom margin-bottom>
-      <ion-input #c (keyup.enter)="moveFocus(d)" type="text" placeholder="Niveau" [(ngModel)]="level"></ion-input>
+      <ion-input #d (keyup.enter)="moveFocus(d)" type="text" placeholder="Niveau" [(ngModel)]="level"></ion-input>
     </ion-item>
     <ion-item margin-bottom margin-bottom>
-      <ion-input #c (keyup.enter)="moveFocus(d)" type="text" placeholder="Latitude" [(ngModel)]="lat"></ion-input>
+      <ion-input #e (keyup.enter)="moveFocus(e)" type="text" placeholder="Latitude" [(ngModel)]="lat"></ion-input>
     </ion-item>
     <ion-item margin-bottom margin-bottom>
-      <ion-input #c (keyup.enter)="moveFocus(d)" type="text" placeholder="Longitude" [(ngModel)]="lng"></ion-input>
+      <ion-input #f (keyup.enter)="moveFocus(f)" type="text" placeholder="Longitude" [(ngModel)]="lng"></ion-input>
     </ion-item>
     <input #imageProd type="hidden" [value]="urlImage | async" style="color:black;">
     <br><br>

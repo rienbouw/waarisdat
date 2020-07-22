@@ -23,3 +23,5 @@ Keywords:
 - Photo slider
 - Share data between pages through Service Provider
 - Store data in Firebase
+- Upload photo into Firebase Store
+- Get EXIF from photos via 'exifr' library

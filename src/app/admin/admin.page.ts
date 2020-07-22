@@ -7,6 +7,8 @@ import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FirebaseService } from '../service/firebase.service';
 import { PhotoMetadata } from '../service/waarisdat.service';
+//import * as exif from 'exif-js';
+import exifr from 'exifr'
 
 @Component({
   selector: 'app-edit-profile',
@@ -53,7 +55,7 @@ export class AdminPage implements OnInit {
           if (user) {
             this.mail = user.email;
             this.uid = user.uid;
-            console.log(this.mail);
+            //console.log(this.mail);
             this.getProfile(this.uid);
           }
         });
@@ -61,13 +63,41 @@ export class AdminPage implements OnInit {
 
   async getProfile(id) {
 
-    console.log('profile empty');
+    //console.log('profile empty');
 
   }
 
 
-  onUpload(e) {
-    console.log(e.target.files[0]);
+  async onUpload(e) {
+    var latlng = await exifr.gps(e.target.files[0]);
+    this.lat = latlng.latitude;
+    this.lng = latlng.longitude;
+
+    //   function ConvertDMSToDD(degrees, minutes, seconds, direction) {
+
+    //     var dd = degrees + (minutes / 60) + (seconds / 3600);
+
+    //     if (direction == "S" || direction == "W") {
+    //       dd = dd * -1;
+    //     }
+
+    //     return dd;
+    //   }
+    //   var allMetaData = exif.getAllTags(this);
+    //   console.log(allMetaData);
+    //   var latDegree = exif.getTag(this, "GPSLatitude")[0].numerator;
+    //   var latMinute = exif.getTag(this, "GPSLatitude")[1].numerator;
+    //   var latSecond = exif.getTag(this, "GPSLatitude")[2].numerator;
+    //   var latDirection = exif.getTag(this, "GPSLatitudeRef");
+    //   console.log(latDegree);
+    //   console.log(latMinute);
+    //   console.log(latSecond);
+    //   console.log(latDirection);
+
+    //   var lat = ConvertDMSToDD(latDegree, latMinute, latSecond, latDirection);
+    //   console.log(lat);
+
+    // });
 
     this.uid = Math.random().toString(36).substring(2);
     const file = e.target.files[0];
@@ -79,6 +109,10 @@ export class AdminPage implements OnInit {
     task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
   }
 
+
+
+  loaded(e) {
+  }
 
   save(name, level, adress, username) {
     const image = this.inputimageProd.nativeElement.value;

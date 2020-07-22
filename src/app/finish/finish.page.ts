@@ -73,7 +73,7 @@ export class FinishPage implements OnInit {
       if (score < 0) {
         score = 0;
       }
-      if (score > 95) {
+      if (score >= 95) {
         score = 100;
       }
       //var photoNumber: number = Number(index) + 1;
