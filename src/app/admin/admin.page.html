@@ -39,7 +39,12 @@
     <ion-item margin-bottom margin-bottom>
       <ion-input #c (keyup.enter)="moveFocus(d)" type="text" placeholder="Niveau" [(ngModel)]="level"></ion-input>
     </ion-item>
-
+    <ion-item margin-bottom margin-bottom>
+      <ion-input #c (keyup.enter)="moveFocus(d)" type="text" placeholder="Latitude" [(ngModel)]="lat"></ion-input>
+    </ion-item>
+    <ion-item margin-bottom margin-bottom>
+      <ion-input #c (keyup.enter)="moveFocus(d)" type="text" placeholder="Longitude" [(ngModel)]="lng"></ion-input>
+    </ion-item>
     <input #imageProd type="hidden" [value]="urlImage | async" style="color:black;">
     <br><br>
     <!-- <ion-button mode="ios" size="large" class="main-container" color="light" expand="block">

@@ -23,6 +23,8 @@ export class StartPage implements OnInit {
   }
 
   ngOnInit() {
+    this.userName = this.waarisdatService.userName;
+    this.waarisdatService.reset();
   }
 
   userNameInput() {
@@ -38,7 +40,6 @@ export class StartPage implements OnInit {
 
     this.authService.doLogin(up)
       .then(res => {
-        this.waarisdatService.reset();
         this.waarisdatService.userName = this.userName;
         this.router.navigate(["photo"]);
       }, err => {

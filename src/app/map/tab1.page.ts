@@ -170,18 +170,18 @@ export class MapPage implements OnInit {
 
     var foundMarker = this.findGuessMarkerWithPhotnumber(this.waarisdatService.currentPhotoIndex + 1);
     if (foundMarker == null) {
-      console.log("push marker " + (this.waarisdatService.currentPhotoIndex + 1));
+      //console.log("push marker " + (this.waarisdatService.currentPhotoIndex + 1));
       this.waarisdatService.markers.push(newMarker);
     } else {
 
-      console.log("update marker " + (this.waarisdatService.currentPhotoIndex + 1));
+      //console.log("update marker " + (this.waarisdatService.currentPhotoIndex + 1));
       foundMarker["lat"] = lat;
       foundMarker["lng"] = lng;
       this.waarisdatService.markers[this.waarisdatService.currentPhotoIndex] = null;
       this.waarisdatService.markers[this.waarisdatService.currentPhotoIndex] = foundMarker;
     }
     this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex] = newMarker; //new google.maps.LatLng(lat, lng);
-    console.log("this.waarisdatService.markersCorrect[" + this.waarisdatService.currentPhotoIndex + "] = new google.maps.LatLng(" + lat + ", " + lng + ");");
+    console.log("LatLng(" + lat + ", " + lng + ");");
     // setTimeout(() => {
     //   this.router.navigate(['/tabs/photo']);
     // },

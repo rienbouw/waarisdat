@@ -28,7 +28,7 @@ export class FirebaseService {
       data => {
         this.photoMetadataList = data.map(a => {
           const pmd = a.payload.doc.data() as PhotoMetadata;
-          console.log(pmd);
+          //console.log(pmd);
           return pmd;
         })
       });
@@ -60,7 +60,7 @@ export class FirebaseService {
   }
 
   getPhotoMetadataList() {
-    console.log("getPhotoMetadataList()");
+    //console.log("getPhotoMetadataList()");
     return this.photoMetadataList;
   }
 

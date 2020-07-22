@@ -79,7 +79,7 @@ export class PhotoPage {
 
   ionViewWillEnter() {
     if (this.firstView) {
-      console.log("firstView");
+      //console.log("firstView");
       this.firstView = false;
     } else {
       if (this.waarisdatService.currentPhotoIndex == this.sliderOne.slidesItems.length - 1) {

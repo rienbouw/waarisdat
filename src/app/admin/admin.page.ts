@@ -19,6 +19,8 @@ export class AdminPage implements OnInit {
   uid: string;
   name: any;
   level: string;
+  lat: number;
+  lng: number;
   adress: string;
   img: string;
   mail: string;
@@ -83,6 +85,8 @@ export class AdminPage implements OnInit {
     const data: PhotoMetadata = {
       name: name,
       level: level,
+      lat: this.lat,
+      lng: this.lng,
       imgUrl: image || this.img,
       description: "",
       uid: this.uid,

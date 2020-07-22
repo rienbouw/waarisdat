@@ -6,19 +6,21 @@ import { WaarisdatService } from "../service/waarisdat.service";
 import { FirebaseService } from '../service/firebase.service';
 import "../../../node_modules/@ionic/angular/css/core.css";
 import { formatDate } from '@angular/common';
+import { PhotoMetadata } from '../service/waarisdat.service';
 
-// /* Basic CSS for apps built with Ionic */
-import "../../../node_modules/@ionic/angular/css/normalize.css";
-import "../../../node_modules/@ionic/angular/css/structure.css";
-import "../../../node_modules/@ionic/angular/css/typography.css";
-import '../../../node_modules/@ionic/angular/css/display.css';
 
-/* Optional CSS utils that can be commented out */
-import "../../../node_modules/@ionic/angular/css/padding.css";
-import "../../../node_modules/@ionic/angular/css/float-elements.css";
-import "../../../node_modules/@ionic/angular/css/text-alignment.css";
-import "../../../node_modules/@ionic/angular/css/text-transformation.css";
-import "../../../node_modules/@ionic/angular/css/flex-utils.css";
+// // /* Basic CSS for apps built with Ionic */
+// import "../../../node_modules/@ionic/angular/css/normalize.css";
+// import "../../../node_modules/@ionic/angular/css/structure.css";
+// import "../../../node_modules/@ionic/angular/css/typography.css";
+// import '../../../node_modules/@ionic/angular/css/display.css';
+
+// /* Optional CSS utils that can be commented out */
+// import "../../../node_modules/@ionic/angular/css/padding.css";
+// import "../../../node_modules/@ionic/angular/css/float-elements.css";
+// import "../../../node_modules/@ionic/angular/css/text-alignment.css";
+// import "../../../node_modules/@ionic/angular/css/text-transformation.css";
+// import "../../../node_modules/@ionic/angular/css/flex-utils.css";
 
 declare var google;
 
@@ -35,6 +37,7 @@ export class FinishPage implements OnInit {
 
 
   feedItems = [];
+  private photoMetadataList: Array<PhotoMetadata>;
   totalScore: number = 0;
 
   constructor(
@@ -53,23 +56,29 @@ export class FinishPage implements OnInit {
 
   ionViewWillEnter() {
     this.feedItems = [];
+    this.totalScore = 0;
     let nPhotos: number = 0; //this.waarisdatService.markersGuess.length;
-
+    this.photoMetadataList = this.waarisdatService.getPhotoMetadataList();
     for (var index in this.waarisdatService.markersGuess) {
+
 
       let guessMarker = this.waarisdatService.markersGuess[index];
       var photoNumber = guessMarker["photoNumber"];
-      let latLngGuess = new google.maps.LatLng(guessMarker["lat"], guessMarker["lng"]);
-      var correctLatLng: LatLng = this.waarisdatService.markersCorrect[photoNumber - 1];
+      var pmd = this.photoMetadataList[photoNumber - 1];
+      let guesslatLng = new google.maps.LatLng(guessMarker["lat"], guessMarker["lng"]);
+      var correctLatLng: LatLng = new google.maps.LatLng(pmd.lat, pmd.lng);
 
-      var distance = this.getDistanceBetween(latLngGuess, correctLatLng);
+      var distance = this.getDistanceBetween(guesslatLng, correctLatLng);
       let score: number = Math.round((1000 - distance) / 10);
       if (score < 0) {
         score = 0;
       }
+      if (score > 95) {
+        score = 100;
+      }
       //var photoNumber: number = Number(index) + 1;
       var scoreListItem = {
-        photo: "assets/images/Waarisdit-00" + photoNumber + ".jpg",
+        photo: pmd.imgUrl,
         photoNumber: photoNumber,
         distance: distance,
         score: score

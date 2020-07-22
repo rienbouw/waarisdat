@@ -6,6 +6,8 @@ export interface PhotoMetadata {
   uid?: string,
   name: string,
   imgUrl: string,
+  lat: number,
+  lng: number,
   level: number,
   description: string,
   date: Date

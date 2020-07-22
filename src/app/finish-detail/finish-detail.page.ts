@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { WaarisdatService } from "../service/waarisdat.service";
+import { WaarisdatService, PhotoMetadata } from "../service/waarisdat.service";
 import { map } from "rxjs/operators";
 import { throwError } from 'rxjs';
 
@@ -14,6 +14,8 @@ export class FinishDetailPage implements OnInit {
   photoNumber = 1;
   centerMarker: any;
   guessMarker: any;
+  private photoMetadataList: Array<PhotoMetadata>;
+  pmd: PhotoMetadata;
   public lines = [];
 
   constructor(
@@ -24,10 +26,12 @@ export class FinishDetailPage implements OnInit {
 
   ngOnInit() {
     this.photoNumber = this.waarisdatService.currentPhotoIndex + 1;
+    this.photoMetadataList = this.waarisdatService.getPhotoMetadataList();
+    this.pmd = this.photoMetadataList[this.photoNumber - 1];
 
     this.centerMarker = {
-      lat: this.waarisdatService.markersCorrect[this.photoNumber - 1].lat(),
-      lng: this.waarisdatService.markersCorrect[this.photoNumber - 1].lng(),
+      lat: Number(this.pmd.lat),
+      lng: Number(this.pmd.lng),
       alpha: 1,
       icon: {
         url: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|f5f242|000000',
@@ -54,8 +58,8 @@ export class FinishDetailPage implements OnInit {
     };
 
     this.lines.push({
-      lat: this.waarisdatService.markersCorrect[this.photoNumber - 1].lat(),
-      lng: this.waarisdatService.markersCorrect[this.photoNumber - 1].lng()
+      lat: Number(this.pmd.lat),
+      lng: Number(this.pmd.lng)
     });
 
     this.lines.push({
