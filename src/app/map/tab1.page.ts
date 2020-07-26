@@ -52,11 +52,11 @@ export class MapPage implements OnInit {
     //   marker.setMap(this.googleMap)
     // });
 
-    this.waarisdatService.markersCorrect[0] = new google.maps.LatLng(52.076789403954095, 5.129023292050916);
-    this.waarisdatService.markersCorrect[1] = new google.maps.LatLng(52.09858353293515, 5.111449956866156);
-    this.waarisdatService.markersCorrect[2] = new google.maps.LatLng(52.08605556641818, 5.117765557501341);
-    this.waarisdatService.markersCorrect[3] = new google.maps.LatLng(52.0820819114837, 5.133151195699135);
-    this.waarisdatService.markersCorrect[4] = new google.maps.LatLng(52.097271420058796, 5.126982463612952);
+    // this.waarisdatService.markersCorrect[0] = new google.maps.LatLng(52.076789403954095, 5.129023292050916);
+    // this.waarisdatService.markersCorrect[1] = new google.maps.LatLng(52.09858353293515, 5.111449956866156);
+    // this.waarisdatService.markersCorrect[2] = new google.maps.LatLng(52.08605556641818, 5.117765557501341);
+    // this.waarisdatService.markersCorrect[3] = new google.maps.LatLng(52.0820819114837, 5.133151195699135);
+    // this.waarisdatService.markersCorrect[4] = new google.maps.LatLng(52.097271420058796, 5.126982463612952);
 
   }
 

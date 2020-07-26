@@ -12,6 +12,7 @@ import { WaarisdatService } from "../service/waarisdat.service";
 export class StartPage implements OnInit {
 
   userName: string = "";
+  level: number = 1;
   startButtonDisabled: boolean = true;
 
   constructor(
@@ -24,6 +25,7 @@ export class StartPage implements OnInit {
 
   ngOnInit() {
     this.userName = this.waarisdatService.userName;
+    this.level = this.waarisdatService.currentLevel;
     this.waarisdatService.reset();
   }
 
@@ -31,6 +33,10 @@ export class StartPage implements OnInit {
     this.startButtonDisabled = false;
   }
 
+  levelInput() {
+    this.waarisdatService.currentLevel = this.level;
+
+  }
   startButton() {
 
     var up = {

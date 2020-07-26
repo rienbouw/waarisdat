@@ -18,10 +18,12 @@ export interface PhotoMetadata {
 })
 export class WaarisdatService {
   currentPhotoIndex: number = 0;
-  markersCorrect = [];
+  //markersCorrect = [];
   markersGuess = [];
   markers = [];
   userName: string = "";
+  currentLevel: number;
+
   constructor(
     private firebaseService: FirebaseService
   ) {
@@ -30,7 +32,7 @@ export class WaarisdatService {
 
   reset() {
     this.currentPhotoIndex = 0;
-    this.markersCorrect = [];
+    // this.markersCorrect = [];
     this.markersGuess = [];
     this.markers = [];
     this.userName = "";
@@ -43,4 +45,9 @@ export class WaarisdatService {
   getPhotoMetadataOfLevel(level: number) {
     return this.firebaseService.getPhotoMetadataOfLevel(level);
   }
+
+  getPhotoMetadataListOfCurrentLevel() {
+    return this.firebaseService.getPhotoMetadataOfLevel(this.currentLevel);
+  }
 }
+

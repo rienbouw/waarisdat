@@ -29,6 +29,7 @@ export class PhotoPage {
   currentPhotoIndex;
   //klaarButtonText = "KLAAR! Laat mij de score zien.";
   photoNumber = 1;
+  level: number;
   firstView: boolean;
   private photoMetadataList: Array<PhotoMetadata>;
 
@@ -58,7 +59,7 @@ export class PhotoPage {
       slidesItems: []
     };
 
-    this.getPhotos();
+
 
   }
 
@@ -78,6 +79,7 @@ export class PhotoPage {
   }
 
   ionViewWillEnter() {
+    this.getPhotos();
     if (this.firstView) {
       //console.log("firstView");
       this.firstView = false;
@@ -92,12 +94,15 @@ export class PhotoPage {
   }
 
   getPhotos() {
-    this.photoMetadataList = this.waarisdatService.getPhotoMetadataList();
-    console.log("Aantal foto's: " + this.photoMetadataList.length);
-    for (var index in this.photoMetadataList) {
-      var pmd = this.photoMetadataList[index];
-      this.sliderOne.slidesItems.push({ id: 1, imgUrl: pmd.imgUrl });
-    }
+    //    this.photoMetadataList = this.waarisdatService.getPhotoMetadataList();
+    this.waarisdatService.getPhotoMetadataListOfCurrentLevel().then(result => {
+      this.photoMetadataList = result;
+      console.log("Aantal foto's voor niveau " + this.waarisdatService.currentLevel + " : " + this.photoMetadataList.length);
+      for (var index in this.photoMetadataList) {
+        var pmd = this.photoMetadataList[index];
+        this.sliderOne.slidesItems.push({ id: 1, imgUrl: pmd.imgUrl });
+      }
+    });
   }
 
   get_CurrentPhotoIndex() {
