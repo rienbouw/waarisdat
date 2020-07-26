@@ -24,6 +24,7 @@ export class FirebaseService {
   ) {
     this.photoMetadataCollection = this.afs.collection<PhotoMetadata>('photoMetadata');
 
+
     this.photoMetadataCollection.snapshotChanges().subscribe(
       data => {
         this.photoMetadataList = data.map(a => {
@@ -32,6 +33,11 @@ export class FirebaseService {
           return pmd;
         })
       });
+  }
+
+  getUidsForLevel(level) {
+    var subset = this.afs.collection('photoMetadata').get()
+    console.log(subset);
   }
 
   addPhotoMetadata(photoMetadata: PhotoMetadata): Promise<DocumentReference> {
@@ -63,6 +69,18 @@ export class FirebaseService {
     //console.log("getPhotoMetadataList()");
     return this.photoMetadataList;
   }
+
+
+  async getPhotoMetadataOfLevel(level) {
+    const snapshot = await firebase.firestore().collection('photoMetadata')
+      .where("level", "==", level.toString())
+      .get()
+    return snapshot.docs.map(a => {
+      const pmd = a.data() as PhotoMetadata;
+      return pmd;
+    });
+  }
+
 
   getTasks() {
     return new Promise<any>((resolve, reject) => {

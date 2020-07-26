@@ -39,4 +39,8 @@ export class WaarisdatService {
   getPhotoMetadataList() {
     return this.firebaseService.getPhotoMetadataList();
   }
+
+  getPhotoMetadataOfLevel(level: number) {
+    return this.firebaseService.getPhotoMetadataOfLevel(level);
+  }
 }
