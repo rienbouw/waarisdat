@@ -105,7 +105,6 @@ export class FinishPage implements OnInit {
           }
         )
     });
-
   }
 
   restartButton() {

@@ -30,7 +30,7 @@ export class PhotoPage {
   //klaarButtonText = "KLAAR! Laat mij de score zien.";
   photoNumber = 1;
   level: number;
-  firstView: boolean;
+
   private photoMetadataList: Array<PhotoMetadata>;
 
   // slideChanged = ev => {
@@ -46,7 +46,7 @@ export class PhotoPage {
 
 
 
-    this.firstView = true;
+
   }
 
   ngOnInit() {
@@ -80,9 +80,10 @@ export class PhotoPage {
 
   ionViewWillEnter() {
     this.getPhotos();
-    if (this.firstView) {
+    if (this.waarisdatService.initializeQuiz) {
       //console.log("firstView");
-      this.firstView = false;
+      this.slides.slideTo(0);
+      this.waarisdatService.initializeQuiz = false;
     } else {
       if (this.waarisdatService.currentPhotoIndex == this.sliderOne.slidesItems.length - 1) {
         this.slides.slideTo(0);

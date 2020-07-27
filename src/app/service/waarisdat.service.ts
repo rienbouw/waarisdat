@@ -23,6 +23,7 @@ export class WaarisdatService {
   markers = [];
   userName: string = "";
   currentLevel: number;
+  initializeQuiz: boolean = true;
 
   constructor(
     private firebaseService: FirebaseService
@@ -36,6 +37,7 @@ export class WaarisdatService {
     this.markersGuess = [];
     this.markers = [];
     this.userName = "";
+    this.initializeQuiz = true;
   }
 
   getPhotoMetadataList() {

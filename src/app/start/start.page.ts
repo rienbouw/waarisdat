@@ -39,19 +39,21 @@ export class StartPage implements OnInit {
   }
   startButton() {
 
-    var up = {
-      email: "rienbouw@gmail.com",
-      password: "adka12"
-    }
+    this.waarisdatService.userName = this.userName;
+    this.router.navigate(["photo"]);
 
-    this.authService.doLogin(up)
-      .then(res => {
-        this.waarisdatService.userName = this.userName;
-        this.router.navigate(["photo"]);
-      }, err => {
+    // var up = {
+    //   email: "rienbouw@gmail.com",
+    //   password: "password"
+    // }
 
-        console.log(err)
-      })
+    // this.authService.doLogin(up)
+    // .then(res => {
+
+    // }, err => {
+
+    // console.log(err)
+    // })
 
 
   }
