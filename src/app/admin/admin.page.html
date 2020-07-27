@@ -12,14 +12,8 @@
   <div class="form">
 
     <div text-center>
-      <img *ngIf="img && !urlImage" src="{{img}}" class="circle" (load)="loaded($event)">
-      <img *ngIf="urlImage" [src]="urlImage | async" class="circle" (load)="loaded($event)">
-
-      <br>
-      <br>
-      <img *ngIf="!urlImage && !img" src="assets/user.svg" width="200px" (load)="loaded($event)"> <br>
+      <img *ngIf="urlImage" [src]="urlImage | async" (load)="loaded($event)">
     </div>
-
 
     <div margin-bottom margin-top text-center>
       <label class="custom-file-upload" style="margin:auto;max-width:400px">
@@ -38,6 +32,11 @@
     </ion-item>
     <ion-item margin-bottom margin-bottom>
       <ion-input #d (keyup.enter)="moveFocus(d)" type="text" placeholder="Niveau" [(ngModel)]="level"></ion-input>
+    </ion-item>
+    <ion-item margin-bottom margin-bottom>
+      <ion-button slot="start" (click)="getLocationFromMap()">
+        <ion-icon name="pin"></ion-icon>
+      </ion-button>
     </ion-item>
     <ion-item margin-bottom margin-bottom>
       <ion-input #e (keyup.enter)="moveFocus(e)" type="text" placeholder="Latitude" [(ngModel)]="lat"></ion-input>

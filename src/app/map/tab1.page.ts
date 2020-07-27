@@ -4,6 +4,7 @@ import { Plugins } from "@capacitor/core";
 import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
+import { ActivatedRoute } from '@angular/router';
 import { ToastController } from "@ionic/angular";
 import { GoogleMap, Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent } from "@ionic-native/google-maps";
 import { WaarisdatService } from "../service/waarisdat.service";
@@ -30,7 +31,8 @@ export class MapPage implements OnInit {
     private http: HttpClient,
     public toastController: ToastController,
     public waarisdatService: WaarisdatService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -61,7 +63,8 @@ export class MapPage implements OnInit {
   }
 
   backButton() {
-    this.router.navigate(['photo'])
+    var back = this.activatedRoute.snapshot.paramMap.get('back');
+    this.router.navigate([back, { lat: this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex]["lat"], lng: this.waarisdatService.markersGuess[this.waarisdatService.currentPhotoIndex]["lng"] }]);
   }
 
   // mapReady(map) {

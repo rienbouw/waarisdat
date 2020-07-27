@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FirebaseService } from '../service/firebase.service';
 import { PhotoMetadata } from '../service/waarisdat.service';
+import { WaarisdatService } from "../service/waarisdat.service";
 //import * as exif from 'exif-js';
 import exifr from 'exifr'
 
@@ -23,6 +24,7 @@ export class AdminPage implements OnInit {
   level: string;
   lat: number;
   lng: number;
+  marker: any;
   adress: string;
   img: string;
   mail: string;
@@ -33,46 +35,63 @@ export class AdminPage implements OnInit {
 
   cp: Boolean;
 
-  constructor(private rout: Router,
-    private route: ActivatedRoute,
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private firebaseService: FirebaseService,
     private afs: AngularFireStorage,
     private loadingController: LoadingController,
-    private aut: AngularFireAuth) {
+    private aut: AngularFireAuth,
+    public waarisdatService: WaarisdatService
+  ) {
   }
 
   ngOnInit() {
-    this.logueado();
+    console.log("admin.ngOnInit() " + this.urlImage);
+    var lat = this.activatedRoute.snapshot.paramMap.get('lat');
+    var lng = this.activatedRoute.snapshot.paramMap.get('lng');
+    if (lat != null) {
+      this.lat = Number(lat);
+      this.lng = Number(lng);
+    }
+    //this.logueado();
+  }
+
+  ngOnDestroy() {
+    console.log("admin.ngOnDestroy()");
+
   }
 
 
+  // logueado() {
+  //   this.aut.authState
+  //     .subscribe(
+  //       user => {
+  //         if (user) {
+  //           this.mail = user.email;
+  //           this.uid = user.uid;
+  //           //console.log(this.mail);
+  //           this.getProfile(this.uid);
+  //         }
+  //       });
+  // }
 
+  // async getProfile(id) {
 
-  logueado() {
-    this.aut.authState
-      .subscribe(
-        user => {
-          if (user) {
-            this.mail = user.email;
-            this.uid = user.uid;
-            //console.log(this.mail);
-            this.getProfile(this.uid);
-          }
-        });
+  //   //console.log('profile empty');
+
+  // }
+
+  getLocationFromMap() {
+    this.router.navigate(["test", { back: "admin" }]);
   }
-
-  async getProfile(id) {
-
-    //console.log('profile empty');
-
-  }
-
 
   async onUpload(e) {
     var latlng = await exifr.gps(e.target.files[0]);
-    this.lat = latlng.latitude;
-    this.lng = latlng.longitude;
-
+    if (latlng != null) {
+      this.lat = latlng.latitude;
+      this.lng = latlng.longitude;
+    }
     //   function ConvertDMSToDD(degrees, minutes, seconds, direction) {
 
     //     var dd = degrees + (minutes / 60) + (seconds / 3600);
@@ -105,14 +124,14 @@ export class AdminPage implements OnInit {
     const ref = this.afs.ref(filePath);
     const task = this.afs.upload(filePath, file);
     this.uploadPercent = task.percentageChanges();
-    this.presentLoading();
+    //   this.presentLoading();
     task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
   }
 
 
 
-  loaded(e) {
-  }
+  // loaded(e) {
+  // }
 
   save(name, level, adress, username) {
     const image = this.inputimageProd.nativeElement.value;
@@ -135,20 +154,20 @@ export class AdminPage implements OnInit {
   }
 
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Foto wordt opgeslagen..',
-      duration: 2000
-    });
-    await loading.present();
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     message: 'Foto wordt opgeslagen..',
+  //     duration: 2000
+  //   });
+  //   await loading.present();
 
-    const { role, data } = await loading.onDidDismiss();
+  //   const { role, data } = await loading.onDidDismiss();
 
-    //console.log('Loading dismissed!');
-  }
+  //   //console.log('Loading dismissed!');
+  // }
 
-  moveFocus(nextElement) {
-    nextElement.setFocus();
-  }
+  // moveFocus(nextElement) {
+  //   nextElement.setFocus();
+  // }
 
 }

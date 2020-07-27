@@ -72,13 +72,15 @@ export class FirebaseService {
 
 
   async getPhotoMetadataOfLevel(level) {
-    const snapshot = await firebase.firestore().collection('photoMetadata')
-      .where("level", "==", level.toString())
-      .get()
-    return snapshot.docs.map(a => {
-      const pmd = a.data() as PhotoMetadata;
-      return pmd;
-    });
+    if (level != null) {
+      const snapshot = await firebase.firestore().collection('photoMetadata')
+        .where("level", "==", level.toString())
+        .get()
+      return snapshot.docs.map(a => {
+        const pmd = a.data() as PhotoMetadata;
+        return pmd;
+      });
+    }
   }
 
 

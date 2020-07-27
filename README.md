@@ -6,7 +6,7 @@
 
 This app is a quiz app.
 It shows you pictures and you have to point them on the map.
-The score is calculated by measuring the distance of the markers from the correct places.
+The score is calculated by measuring the distance between the guessed location and the correct location.
 
 Keywords:
 
@@ -22,6 +22,7 @@ Keywords:
 - Draw line between two markers
 - Photo slider
 - Share data between pages through Service Provider
+- Pass data in navigation to another page
 - Store data in Firebase
 - Get random subset from Collection in Firebase
 - Upload photo into Firebase Store
@@ -30,6 +31,6 @@ Keywords:
 Install:
 
 - git clone this project
-- edit and rename srv/environment/environment_README.ts
+- edit and rename src/environment/environment_README.ts
 - npm install
 - ionic serve

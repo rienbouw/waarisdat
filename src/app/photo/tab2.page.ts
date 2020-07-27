@@ -50,7 +50,7 @@ export class PhotoPage {
   }
 
   ngOnInit() {
-    console.log("ngOnInit photo"); //enable the log, and this page will be initialized each time it is navigated to!!!!!
+    //console.log("ngOnInit photo"); //enable the log, and this page will be initialized each time it is navigated to!!!!!
 
     this.sliderOne =
     {
@@ -74,8 +74,7 @@ export class PhotoPage {
     //console.log("onPhotoClick: currentPhotoIndex " + this.waarisdatService.currentPhotoIndex); //enable this line and ngOninit is called on map page!!!!!!!!!!!!
     let zoom = this.slider.nativeElement.swiper.zoom;
     zoom.out();
-    this.router.navigate(['map'])
-
+    this.router.navigate(["map", { back: "photo" }]);
   }
 
   ionViewWillEnter() {
@@ -97,11 +96,13 @@ export class PhotoPage {
   getPhotos() {
     //    this.photoMetadataList = this.waarisdatService.getPhotoMetadataList();
     this.waarisdatService.getPhotoMetadataListOfCurrentLevel().then(result => {
-      this.photoMetadataList = result;
-      console.log("Aantal foto's voor niveau " + this.waarisdatService.currentLevel + " : " + this.photoMetadataList.length);
-      for (var index in this.photoMetadataList) {
-        var pmd = this.photoMetadataList[index];
-        this.sliderOne.slidesItems.push({ id: 1, imgUrl: pmd.imgUrl });
+      if (result != null) {
+        this.photoMetadataList = result;
+        console.log("Aantal foto's voor niveau " + this.waarisdatService.currentLevel + " : " + this.photoMetadataList.length);
+        for (var index in this.photoMetadataList) {
+          var pmd = this.photoMetadataList[index];
+          this.sliderOne.slidesItems.push({ id: 1, imgUrl: pmd.imgUrl });
+        }
       }
     });
   }

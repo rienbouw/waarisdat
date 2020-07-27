@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { PhotoMetadata } from '../service/waarisdat.service';
 import { WaarisdatService } from "../service/waarisdat.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -16,19 +17,26 @@ export class TestPage implements OnInit {
 
   constructor(
     public afs: AngularFirestore,
-    public waarisdatService: WaarisdatService
+    public waarisdatService: WaarisdatService,
+    private router: Router
   ) {
 
   }
 
   ngOnInit() {
+    console.log("test.ngOnInit()");
+
     this.waarisdatService.getPhotoMetadataOfLevel(1).then(result => {
       for (var index in result) {
         var pmd: PhotoMetadata = result[index];
         console.log(pmd);
       }
     });
-  }
 
+
+  }
+  onButton() {
+    this.router.navigate(["admin"]);
+  }
 }
 
