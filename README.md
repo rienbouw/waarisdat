@@ -23,5 +23,13 @@ Keywords:
 - Photo slider
 - Share data between pages through Service Provider
 - Store data in Firebase
+- Get random subset from Collection in Firebase
 - Upload photo into Firebase Store
 - Get EXIF from photos via 'exifr' library
+
+Install:
+
+- git clone this project
+- edit and rename srv/environment/environment_README.ts
+- npm install
+- ionic serve
