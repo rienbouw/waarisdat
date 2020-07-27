@@ -30,3 +30,4 @@ deploy.sh
 /platforms
 /plugins
 /www
+environments*.*
