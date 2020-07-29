@@ -26,46 +26,50 @@ export class FinishDetailPage implements OnInit {
 
   ngOnInit() {
     this.photoNumber = this.waarisdatService.currentPhotoIndex + 1;
-    this.photoMetadataList = this.waarisdatService.getPhotoMetadataList();
-    this.pmd = this.photoMetadataList[this.photoNumber - 1];
+    this.waarisdatService.getPhotoMetadataListOfCurrentLevel().then(result => {
+      if (result != null) {
+        this.photoMetadataList = result;
+      };
+      this.pmd = this.photoMetadataList[this.photoNumber - 1];
+      console.log(this.pmd.imgUrl);
+      this.centerMarker = {
+        lat: Number(this.pmd.lat),
+        lng: Number(this.pmd.lng),
+        alpha: 1,
+        icon: {
+          url: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|f5f242|000000',
+          scaledSize: {
+            width: 30,
+            height: 40
+          }
+        },
+        photoNumber: this.waarisdatService.currentPhotoIndex + 1
+      };
 
-    this.centerMarker = {
-      lat: Number(this.pmd.lat),
-      lng: Number(this.pmd.lng),
-      alpha: 1,
-      icon: {
-        url: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|f5f242|000000',
-        scaledSize: {
-          width: 30,
-          height: 40
-        }
-      },
-      photoNumber: this.waarisdatService.currentPhotoIndex + 1
-    };
+      this.guessMarker = {
+        lat: this.waarisdatService.markersGuess[this.photoNumber - 1]["lat"],
+        lng: this.waarisdatService.markersGuess[this.photoNumber - 1]["lng"],
+        alpha: 1,
+        icon: {
+          url: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|f5f242|000000',
+          scaledSize: {
+            width: 30,
+            height: 40
+          }
+        },
+        photoNumber: this.waarisdatService.currentPhotoIndex + 1
+      };
 
-    this.guessMarker = {
-      lat: this.waarisdatService.markersGuess[this.photoNumber - 1]["lat"],
-      lng: this.waarisdatService.markersGuess[this.photoNumber - 1]["lng"],
-      alpha: 1,
-      icon: {
-        url: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (this.waarisdatService.currentPhotoIndex + 1) + '|f5f242|000000',
-        scaledSize: {
-          width: 30,
-          height: 40
-        }
-      },
-      photoNumber: this.waarisdatService.currentPhotoIndex + 1
-    };
+      this.lines.push({
+        lat: Number(this.pmd.lat),
+        lng: Number(this.pmd.lng)
+      });
 
-    this.lines.push({
-      lat: Number(this.pmd.lat),
-      lng: Number(this.pmd.lng)
-    });
-
-    this.lines.push({
-      lat: this.waarisdatService.markersGuess[this.photoNumber - 1]["lat"],
-      lng: this.waarisdatService.markersGuess[this.photoNumber - 1]["lng"]
-    });
+      this.lines.push({
+        lat: this.waarisdatService.markersGuess[this.photoNumber - 1]["lat"],
+        lng: this.waarisdatService.markersGuess[this.photoNumber - 1]["lng"]
+      });
+    })
   }
 
   ionViewWillEnter() {
