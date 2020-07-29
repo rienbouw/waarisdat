@@ -8,6 +8,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { FirebaseService } from '../service/firebase.service';
 import { PhotoMetadata } from '../service/waarisdat.service';
 import { WaarisdatService } from "../service/waarisdat.service";
+import { AdminPageData } from "../service/waarisdat.service";
+
 //import * as exif from 'exif-js';
 import exifr from 'exifr'
 
@@ -17,22 +19,18 @@ import exifr from 'exifr'
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
+
   @ViewChild('imageProd') inputimageProd: ElementRef;
+  adminPageData: AdminPageData = <AdminPageData>{};
   id: any;
   uid: string;
-  name: any;
-  level: string;
-  lat: number;
-  lng: number;
   marker: any;
   adress: string;
   img: string;
   mail: string;
   uploadPercent: Observable<number>;
-  urlImage: Observable<string>;
   item: any;
   username: string;
-
   cp: Boolean;
 
   constructor(
@@ -47,21 +45,14 @@ export class AdminPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log("admin.ngOnInit() " + this.urlImage);
+    this.adminPageData = this.waarisdatService.adminPageData;
     var lat = this.activatedRoute.snapshot.paramMap.get('lat');
     var lng = this.activatedRoute.snapshot.paramMap.get('lng');
     if (lat != null) {
-      this.lat = Number(lat);
-      this.lng = Number(lng);
+      this.adminPageData.lat = Number(lat);
+      this.adminPageData.lng = Number(lng);
     }
-    //this.logueado();
   }
-
-  ngOnDestroy() {
-    console.log("admin.ngOnDestroy()");
-
-  }
-
 
   // logueado() {
   //   this.aut.authState
@@ -83,14 +74,16 @@ export class AdminPage implements OnInit {
   // }
 
   getLocationFromMap() {
-    this.router.navigate(["test", { back: "admin" }]);
+    this.waarisdatService.adminPageData = this.adminPageData;
+    console.log(this.adminPageData.name);
+    this.router.navigate(["map", { back: "admin" }]);
   }
 
   async onUpload(e) {
     var latlng = await exifr.gps(e.target.files[0]);
     if (latlng != null) {
-      this.lat = latlng.latitude;
-      this.lng = latlng.longitude;
+      this.adminPageData.lat = latlng.latitude;
+      this.adminPageData.lng = latlng.longitude;
     }
     //   function ConvertDMSToDD(degrees, minutes, seconds, direction) {
 
@@ -125,7 +118,7 @@ export class AdminPage implements OnInit {
     const task = this.afs.upload(filePath, file);
     this.uploadPercent = task.percentageChanges();
     //   this.presentLoading();
-    task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
+    task.snapshotChanges().pipe(finalize(() => this.adminPageData.urlImage = ref.getDownloadURL())).subscribe();
   }
 
 
@@ -133,13 +126,13 @@ export class AdminPage implements OnInit {
   // loaded(e) {
   // }
 
-  save(name, level, adress, username) {
+  save() {
     const image = this.inputimageProd.nativeElement.value;
     const data: PhotoMetadata = {
-      name: name,
-      level: level,
-      lat: this.lat,
-      lng: this.lng,
+      name: this.adminPageData.name,
+      level: Number(this.adminPageData.level),
+      lat: this.adminPageData.lat,
+      lng: this.adminPageData.lng,
       imgUrl: image || this.img,
       description: "",
       uid: this.uid,

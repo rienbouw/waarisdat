@@ -2,6 +2,14 @@ import { Injectable } from '@angular/core';
 import { FirebaseService } from '../service/firebase.service';
 import { Observable } from 'rxjs';
 
+export interface AdminPageData {
+  name: string;
+  level: string;
+  lat: number;
+  lng: number;
+  urlImage: Observable<string>;
+}
+
 export interface PhotoMetadata {
   uid?: string,
   name: string,
@@ -24,6 +32,7 @@ export class WaarisdatService {
   userName: string = "";
   currentLevel: number;
   initializeQuiz: boolean = true;
+  adminPageData: AdminPageData = <AdminPageData>{};
 
   constructor(
     private firebaseService: FirebaseService
