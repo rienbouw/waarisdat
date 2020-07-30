@@ -113,7 +113,7 @@ export class AdminPage implements OnInit {
 
     this.adminPageData.uid = Math.random().toString(36).substring(2);
     const file = e.target.files[0];
-    const filePath = `photo/${this.uid}`;
+    const filePath = `photo/${this.adminPageData.uid}`;
     const ref = this.afs.ref(filePath);
     const task = this.afs.upload(filePath, file);
     this.uploadPercent = task.percentageChanges();
