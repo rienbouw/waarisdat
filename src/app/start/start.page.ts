@@ -25,6 +25,7 @@ export class StartPage implements OnInit {
 
   ngOnInit() {
     this.userName = this.waarisdatService.userName;
+
     this.level = this.waarisdatService.currentLevel;
     this.waarisdatService.reset();
   }
@@ -40,6 +41,8 @@ export class StartPage implements OnInit {
   startButton() {
 
     this.waarisdatService.userName = this.userName;
+    this.waarisdatService.currentLevel = this.level;
+    //console.log("startButton " + this.level);
     this.router.navigate(["photo"]);
 
     // var up = {

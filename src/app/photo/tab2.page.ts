@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ declare var google;
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class PhotoPage {
+export class PhotoPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
   @ViewChild('slideWithNav', { read: ElementRef }) slider: ElementRef;
 
@@ -43,24 +43,15 @@ export class PhotoPage {
     private router: Router,
     public waarisdatService: WaarisdatService
   ) {
-
-
-
-
   }
 
   ngOnInit() {
-    //console.log("ngOnInit photo"); //enable the log, and this page will be initialized each time it is navigated to!!!!!
-
     this.sliderOne =
     {
       isBeginningSlide: true,
       isEndSlide: false,
       slidesItems: []
     };
-
-
-
   }
 
 
@@ -78,6 +69,11 @@ export class PhotoPage {
   }
 
   ionViewWillEnter() {
+
+
+    this.level = this.waarisdatService.currentLevel;
+    //console.log("ngOnInit photo " + this.level); 
+
     this.getPhotos();
     if (this.waarisdatService.initializeQuiz) {
       //console.log("firstView");

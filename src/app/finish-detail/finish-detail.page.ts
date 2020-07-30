@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { WaarisdatService, PhotoMetadata } from "../service/waarisdat.service";
 import { map } from "rxjs/operators";
 import { throwError } from 'rxjs';
+import { LatLng } from '@ionic-native/google-maps';
 
 @Component({
   selector: 'app-finish-detail',
@@ -12,26 +13,26 @@ import { throwError } from 'rxjs';
 export class FinishDetailPage implements OnInit {
 
   photoNumber = 1;
-  centerMarker: any;
-  guessMarker: any;
+  centerMarker: any = {};
+  guessMarker: any = {};
   private photoMetadataList: Array<PhotoMetadata>;
-  pmd: PhotoMetadata;
+  pmd: PhotoMetadata = <PhotoMetadata>{};
   public lines = [];
 
   constructor(
     private router: Router,
     public waarisdatService: WaarisdatService
   ) {
+
   }
 
   ngOnInit() {
-    this.photoNumber = this.waarisdatService.currentPhotoIndex + 1;
     this.waarisdatService.getPhotoMetadataListOfCurrentLevel().then(result => {
-      if (result != null) {
-        this.photoMetadataList = result;
-      };
+      //console.log(result);
+      this.photoMetadataList = result;
+      this.photoNumber = this.waarisdatService.currentPhotoIndex + 1;
       this.pmd = this.photoMetadataList[this.photoNumber - 1];
-      console.log(this.pmd.imgUrl);
+      //console.log(this.pmd.imgUrl);
       this.centerMarker = {
         lat: Number(this.pmd.lat),
         lng: Number(this.pmd.lng),
@@ -69,7 +70,7 @@ export class FinishDetailPage implements OnInit {
         lat: this.waarisdatService.markersGuess[this.photoNumber - 1]["lat"],
         lng: this.waarisdatService.markersGuess[this.photoNumber - 1]["lng"]
       });
-    })
+    });
   }
 
   ionViewWillEnter() {

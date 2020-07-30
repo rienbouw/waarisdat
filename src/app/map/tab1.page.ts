@@ -23,7 +23,6 @@ export class MapPage implements OnInit {
   centerLat: number;
   centerLng: number;
 
-  newMarker;
   address: string;
   googleMap: any;
 
@@ -36,7 +35,12 @@ export class MapPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("ngOnInit map");
+    // console.log("ngOnInit map");
+
+    if (this.waarisdatService.initializeQuiz) {
+      this.waarisdatService.markers = [];
+      // console.log("ngOnInit map reset");
+    }
     this.centerLat = 52.09067047478424;
     this.centerLng = 5.120769093002053;
     //this.getCurrentLocation();

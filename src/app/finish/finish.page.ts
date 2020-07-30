@@ -86,7 +86,7 @@ export class FinishPage implements OnInit {
           score: score
         };
         this.feedItems.push(scoreListItem);
-        console.log(scoreListItem.score);
+        //console.log(scoreListItem.score);
         nPhotos += 1;
         this.totalScore += score;
 
@@ -97,6 +97,7 @@ export class FinishPage implements OnInit {
       let data = {
         title: title,
         description: "Totaal Score: " + this.totalScore.toString() + " van de 100",
+        uid: this.waarisdatService.userName,
         image: null
       }
       this.firebaseService.createTask(data)

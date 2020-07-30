@@ -30,7 +30,7 @@ export class WaarisdatService {
   markersGuess = [];
   markers = [];
   userName: string = "";
-  currentLevel: number;
+  currentLevel: number = 1;
   initializeQuiz: boolean = true;
   adminPageData: AdminPageData = <AdminPageData>{};
 
@@ -57,8 +57,12 @@ export class WaarisdatService {
     return this.firebaseService.getPhotoMetadataOfLevel(level);
   }
 
-  getPhotoMetadataListOfCurrentLevel() {
-    return this.firebaseService.getPhotoMetadataOfLevel(this.currentLevel);
+  async getPhotoMetadataListOfCurrentLevel() {
+    if (this.currentLevel != null) {
+      let result = await this.firebaseService.getPhotoMetadataOfLevel(this.currentLevel);
+      //console.log("getPhotoMetadataListOfCurrentLevel.result:" + result);
+      return result;
+    }
   }
 }
 
