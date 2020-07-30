@@ -8,6 +8,7 @@ export interface AdminPageData {
   lat: number;
   lng: number;
   urlImage: Observable<string>;
+  uid: string;
 }
 
 export interface PhotoMetadata {

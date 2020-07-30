@@ -41,7 +41,7 @@ export class FirebaseService {
   }
 
   addPhotoMetadata(photoMetadata: PhotoMetadata): Promise<DocumentReference> {
-    console.log("Save photo metadata for " + photoMetadata.uid);
+    //console.log("Save photo metadata for " + photoMetadata.uid);
     return this.photoMetadataCollection.add(photoMetadata);
   }
 

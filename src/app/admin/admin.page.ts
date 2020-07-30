@@ -23,7 +23,7 @@ export class AdminPage implements OnInit {
   @ViewChild('imageProd') inputimageProd: ElementRef;
   adminPageData: AdminPageData = <AdminPageData>{};
   id: any;
-  uid: string;
+
   marker: any;
   adress: string;
   img: string;
@@ -111,13 +111,13 @@ export class AdminPage implements OnInit {
 
     // });
 
-    this.uid = Math.random().toString(36).substring(2);
+    this.adminPageData.uid = Math.random().toString(36).substring(2);
     const file = e.target.files[0];
     const filePath = `photo/${this.uid}`;
     const ref = this.afs.ref(filePath);
     const task = this.afs.upload(filePath, file);
     this.uploadPercent = task.percentageChanges();
-    //   this.presentLoading();
+    this.presentLoading();
     task.snapshotChanges().pipe(finalize(() => this.adminPageData.urlImage = ref.getDownloadURL())).subscribe();
   }
 
@@ -135,10 +135,10 @@ export class AdminPage implements OnInit {
       lng: this.adminPageData.lng,
       imgUrl: image || this.img,
       description: "",
-      uid: this.uid,
+      uid: this.adminPageData.uid,
       date: new Date()
     };
-    console.log(data);
+    //console.log(data);
     this.firebaseService.addPhotoMetadata(data).then(
       res => {
         console.log('Upload' + res);
@@ -147,17 +147,17 @@ export class AdminPage implements OnInit {
   }
 
 
-  // async presentLoading() {
-  //   const loading = await this.loadingController.create({
-  //     message: 'Foto wordt opgeslagen..',
-  //     duration: 2000
-  //   });
-  //   await loading.present();
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Foto wordt opgeslagen..',
+      duration: 2000
+    });
+    await loading.present();
 
-  //   const { role, data } = await loading.onDidDismiss();
+    const { role, data } = await loading.onDidDismiss();
 
-  //   //console.log('Loading dismissed!');
-  // }
+    //console.log('Loading dismissed!');
+  }
 
   // moveFocus(nextElement) {
   //   nextElement.setFocus();

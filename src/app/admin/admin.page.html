@@ -12,7 +12,7 @@
   <div class="form">
 
     <div text-center>
-      <img *ngIf="adminPageData.urlImage" [src]="adminPageData.urlImage | async" (load)="loaded($event)">
+      <img *ngIf="adminPageData.urlImage" [src]="adminPageData.urlImage | async">
     </div>
 
     <div margin-bottom margin-top text-center>
@@ -28,11 +28,11 @@
 
     <br>
     <ion-item margin-bottom margin-bottom>
-      <ion-input #c (keyup.enter)="moveFocus(c)" type="text" placeholder="Naam" [(ngModel)]="adminPageData.name">
+      <ion-input type="text" placeholder="Naam" [(ngModel)]="adminPageData.name">
       </ion-input>
     </ion-item>
     <ion-item margin-bottom margin-bottom>
-      <ion-input #d (keyup.enter)="moveFocus(d)" type="text" placeholder="Level" [(ngModel)]="adminPageData.level">
+      <ion-input type="text" placeholder="Level" [(ngModel)]="adminPageData.level">
       </ion-input>
     </ion-item>
     <ion-item margin-bottom margin-bottom>
@@ -41,11 +41,11 @@
       </ion-button>
     </ion-item>
     <ion-item margin-bottom margin-bottom>
-      <ion-input #e (keyup.enter)="moveFocus(e)" type="text" placeholder="Latitude" [(ngModel)]="adminPageData.lat">
+      <ion-input type="text" placeholder="Latitude" [(ngModel)]="adminPageData.lat">
       </ion-input>
     </ion-item>
     <ion-item margin-bottom margin-bottom>
-      <ion-input #f (keyup.enter)="moveFocus(f)" type="text" placeholder="Longitude" [(ngModel)]="adminPageData.lng">
+      <ion-input type="text" placeholder="Longitude" [(ngModel)]="adminPageData.lng">
       </ion-input>
     </ion-item>
     <input #imageProd type="hidden" [value]="adminPageData.urlImage | async" style="color:black;">
