@@ -39,6 +39,9 @@ export class FinishPage implements OnInit {
   feedItems = [];
   private photoMetadataList: Array<PhotoMetadata>;
   totalScore: number = 0;
+  centerLat: number;
+  centerLng: number;
+  public lines = [];
 
   constructor(
     public navCtrl: NavController,
@@ -47,6 +50,12 @@ export class FinishPage implements OnInit {
     private firebaseService: FirebaseService) { }
 
   ngOnInit() {
+    if (this.waarisdatService.initializeQuiz) {
+      this.waarisdatService.markers = [];
+
+    }
+    this.centerLat = 52.09067047478424;
+    this.centerLng = 5.120769093002053;
   }
 
   finishDetail(feed: any) {
@@ -67,8 +76,35 @@ export class FinishPage implements OnInit {
         let guessMarker = this.waarisdatService.markersGuess[index];
         var photoNumber = guessMarker["photoNumber"];
         var pmd = this.photoMetadataList[photoNumber - 1];
+
+
+        var correctMarker = {
+          lat: pmd.lat,
+          lng: pmd.lng,
+          alpha: 1,
+          icon: {
+            scaledSize: {
+              width: 30,
+              height: 40
+            }
+          },
+          photoNumber: this.waarisdatService.currentPhotoIndex + 1
+        };
+        this.waarisdatService.markersCorrect.push(correctMarker);
+
         let guesslatLng = new google.maps.LatLng(guessMarker["lat"], guessMarker["lng"]);
         var correctLatLng: LatLng = new google.maps.LatLng(pmd.lat, pmd.lng);
+
+        let line = [];
+        line.push({
+          lat: Number(pmd.lat),
+          lng: Number(pmd.lng)
+        });
+        line.push({
+          lat: this.waarisdatService.markersGuess[index]["lat"],
+          lng: this.waarisdatService.markersGuess[index]["lng"]
+        });
+        this.lines.push(line);
 
         var distance = this.getDistanceBetween(guesslatLng, correctLatLng);
         let score: number = Math.round((1000 - distance) / 10);
@@ -89,6 +125,8 @@ export class FinishPage implements OnInit {
         //console.log(scoreListItem.score);
         nPhotos += 1;
         this.totalScore += score;
+
+        console.log(this.lines);
 
       }
       console.log("Totaal Score: " + this.totalScore.toString() + " van de 100");

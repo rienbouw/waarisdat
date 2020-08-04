@@ -14,7 +14,7 @@
     <img height="200" src={{pmd.imgUrl}}>
     <h3>{{pmd.name}}</h3>
   </div>
-  <agm-map #map [fitBounds]="true" [latitude]="centerMarker.lat" [longitude]="centerMarker.lng" [zoom]="13"
+  <agm-map #map [fitBounds]="true" [latitude]="centerMarker.lat" [longitude]="centerMarker.lng" [zoom]="4"
     [clickableIcons]="false">
     <agm-marker [agmFitBounds]="true" [latitude]="guessMarker.lat" [longitude]="guessMarker.lng"
       [iconUrl]="guessMarker.icon"> </agm-marker>

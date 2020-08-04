@@ -30,6 +30,7 @@ export class WaarisdatService {
   //markersCorrect = [];
   markersGuess = [];
   markers = [];
+  markersCorrect = [];
   userName: string = "";
   currentLevel: number = 1;
   initializeQuiz: boolean = true;

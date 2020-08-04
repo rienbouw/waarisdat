@@ -6,28 +6,40 @@
 </ion-header>
 
 <ion-content class="ion-content">
-  <div id="body">
-    <p>Klik op een foto voor de details</p>
-    <ion-list>
-      <ion-item *ngFor=" let feed of feedItems" (click)='finishDetail(feed)'>
-        <ion-thumbnail item-left>
-          <img *ngIf="feed.photo !='-'" src={{feed.photo}} />
-        </ion-thumbnail>
-        <ion-label class="item-right">
-          <ion-text>
-            <h2>Foto #{{feed.photoNumber}}</h2>
-            <p>Afstand tot de goede plek: {{feed.distance}}m</p>
-            <p class="score">Score: {{feed.score}} punten</p>
-          </ion-text>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-    <h1>Totaal Score: {{totalScore}} punten</h1>
-    <ion-list style="text-align:center">
-      <ion-button slot="end" (click)="restartButton()">
-        Opnieuw
-      </ion-button>
-    </ion-list>
 
-  </div>
+  <agm-map #map [latitude]="centerLat" [longitude]="centerLng" [zoom]="14" [clickableIcons]="false"
+    (mapClick)="onMapClick($event.coords.lat, $event.coords.lng)">
+    <agm-marker *ngFor="let marker of this.waarisdatService.markers" [latitude]="marker.lat" [longitude]="marker.lng"
+      [iconUrl]="marker.icon"></agm-marker>
+
+    <agm-marker *ngFor="let marker of this.waarisdatService.markersCorrect" [latitude]="marker.lat"
+      [longitude]="marker.lng"></agm-marker>
+    <agm-polyline [strokeColor]="'red'" *ngFor="let line of lines">
+      <agm-polyline-point *ngFor="let point of line" [latitude]="point.lat" [longitude]="point.lng">
+      </agm-polyline-point>
+    </agm-polyline>
+  </agm-map>
+  <p>Klik op een foto voor de details</p>
+  <ion-list>
+    <ion-item *ngFor=" let feed of feedItems" (click)='finishDetail(feed)'>
+      <ion-thumbnail item-left>
+        <img *ngIf="feed.photo !='-'" src={{feed.photo}} />
+      </ion-thumbnail>
+      <ion-label class="item-right">
+        <ion-text>
+          <h2>Foto #{{feed.photoNumber}}</h2>
+          <p>Afstand tot de goede plek: {{feed.distance}}m</p>
+          <p class="score">Score: {{feed.score}} punten</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <h1>Totaal Score: {{totalScore}} punten</h1>
+  <ion-list style="text-align:center">
+    <ion-button slot="end" (click)="restartButton()">
+      Opnieuw
+    </ion-button>
+  </ion-list>
+
+
 </ion-content>
