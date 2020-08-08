@@ -81,11 +81,10 @@ export class FinishPage implements OnInit {
         var correctMarker = {
           lat: pmd.lat,
           lng: pmd.lng,
-          alpha: 1,
           icon: {
             scaledSize: {
-              width: 30,
-              height: 40
+              width: 20,
+              height: 30
             }
           },
           photoNumber: this.waarisdatService.currentPhotoIndex + 1

@@ -14,7 +14,7 @@
 
     <agm-marker *ngFor="let marker of this.waarisdatService.markersCorrect" [latitude]="marker.lat"
       [longitude]="marker.lng"></agm-marker>
-    <agm-polyline [strokeColor]="'red'" *ngFor="let line of lines">
+    <agm-polyline [strokeColor]="'red'" [strokeWeight]="2" *ngFor="let line of lines">
       <agm-polyline-point *ngFor="let point of line" [latitude]="point.lat" [longitude]="point.lng">
       </agm-polyline-point>
     </agm-polyline>
