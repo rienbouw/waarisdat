@@ -69,27 +69,9 @@ export class PhotoPage implements OnInit {
   }
 
   ionViewWillEnter() {
-
-
     this.level = this.waarisdatService.currentLevel;
     //console.log("ngOnInit photo " + this.level); 
 
-    this.getPhotos();
-    if (this.waarisdatService.initializeQuiz) {
-      //console.log("firstView");
-      this.slides.slideTo(0);
-      this.waarisdatService.initializeQuiz = false;
-    } else {
-      if (this.waarisdatService.currentPhotoIndex == this.sliderOne.slidesItems.length - 1) {
-        this.slides.slideTo(0);
-      } else {
-        this.slides.slideNext();
-      }
-    }
-    this.slideChanged();
-  }
-
-  getPhotos() {
     //    this.photoMetadataList = this.waarisdatService.getPhotoMetadataList();
     this.waarisdatService.getPhotoMetadataListOfCurrentLevel().then(result => {
       if (result != null) {
@@ -98,6 +80,27 @@ export class PhotoPage implements OnInit {
         for (var index in this.photoMetadataList) {
           var pmd = this.photoMetadataList[index];
           this.sliderOne.slidesItems.push({ id: 1, imgUrl: pmd.imgUrl });
+        }
+
+        if (this.waarisdatService.initializeQuiz) {
+          //console.log("firstView");
+          this.slides.slideTo(0);
+          this.waarisdatService.currentPhotoIndex = 0;
+          this.waarisdatService.initializeQuiz = false;
+        } else {
+
+          if (this.photoMetadataList == null || this.waarisdatService.currentPhotoIndex + 1 == this.photoMetadataList.length) {
+            console.log("ionViewWillEnter slide 0");
+            this.slides.slideTo(0);
+          } else {
+            this.slides.slideTo(this.waarisdatService.currentPhotoIndex + 1);
+            this.slides.getActiveIndex().then(index => {
+              console.log("ionViewWillEnter slide moved to " + (index + 1));
+              console.log(this.waarisdatService.currentPhotoIndex);
+            });
+          }
+
+          this.slideChanged();
         }
       }
     });
@@ -119,6 +122,7 @@ export class PhotoPage implements OnInit {
     this.slides.getActiveIndex().then(index => {
       this.waarisdatService.currentPhotoIndex = index;
       this.photoNumber = index + 1;
+      console.log("slideChanged to " + this.photoNumber);
     });
   }
 

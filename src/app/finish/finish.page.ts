@@ -124,8 +124,7 @@ export class FinishPage implements OnInit {
         //console.log(scoreListItem.score);
         nPhotos += 1;
         this.totalScore += score;
-
-        console.log(this.lines);
+        //console.log(this.lines);
 
       }
       console.log("Totaal Score: " + this.totalScore.toString() + " van de 100");
