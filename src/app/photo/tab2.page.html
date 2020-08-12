@@ -1,10 +1,4 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title mode=ios>Waarisdat</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
   <ion-row>
     <ion-col class="level">Level {{level}}</ion-col>
   </ion-row>
@@ -22,6 +16,10 @@
       </ion-button>
     </ion-col>
   </ion-row>
+</ion-header>
+
+<ion-content>
+
   <!--</div> van {{this.sliderOne.slidesItems.length}}</div>-->
   <div class="ion-padding">
     <ion-slides pager="true" paginationType="fraction" [options]="slideOptsOne" zoom #slideWithNav
