@@ -69,6 +69,12 @@ export class PhotoPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.sliderOne =
+    {
+      isBeginningSlide: true,
+      isEndSlide: false,
+      slidesItems: []
+    };
     this.level = this.waarisdatService.currentLevel;
     //console.log("ngOnInit photo " + this.level); 
 
@@ -76,6 +82,7 @@ export class PhotoPage implements OnInit {
     this.waarisdatService.getPhotoMetadataListOfCurrentLevel().then(result => {
       if (result != null) {
         this.photoMetadataList = result;
+        this.waarisdatService.currentNumberOfPhotos = this.photoMetadataList.length;
         console.log("Aantal foto's voor niveau " + this.waarisdatService.currentLevel + " : " + this.photoMetadataList.length);
         for (var index in this.photoMetadataList) {
           var pmd = this.photoMetadataList[index];
@@ -83,8 +90,9 @@ export class PhotoPage implements OnInit {
         }
 
         if (this.waarisdatService.initializeQuiz) {
-          //console.log("firstView");
+          console.log("photo - initializeQuiz");
           this.slides.slideTo(0);
+          this.photoNumber = 1;
           this.waarisdatService.currentPhotoIndex = 0;
           this.waarisdatService.initializeQuiz = false;
         } else {

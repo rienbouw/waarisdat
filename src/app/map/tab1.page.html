@@ -1,9 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="backButton()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
+    <ion-buttons end>
+      <!-- <ion-row>
+        <ion-col> -->
+      <ion-button class="button-outline" (click)="backButton()">
+        <ion-icon name="image-outline"></ion-icon>
+        &nbsp;Foto
       </ion-button>
+      <!-- </ion-col>
+        <ion-col>-->
+      <ion-button slot="end" class="button-outline" (click)="klaarButton()">
+        <ion-icon name="trophy-outline"></ion-icon>
+        &nbsp;Klaar
+      </ion-button>
+      <!-- </ion-col>
+      </ion-row> -->
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

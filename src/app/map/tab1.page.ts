@@ -242,6 +242,9 @@ export class MapPage implements OnInit {
     return result;
   }
 
+  klaarButton() {
+    this.router.navigate(['finish'])
+  }
   protected mapLoad(map) {
     //console.log("mapLoad: + " + map);
     //this.renderGeolocationControl(map);

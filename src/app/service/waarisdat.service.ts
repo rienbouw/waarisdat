@@ -33,6 +33,7 @@ export class WaarisdatService {
   markersCorrect = [];
   userName: string = "";
   currentLevel: number = 1;
+  currentNumberOfPhotos: number = 0;
   initializeQuiz: boolean = true;
   adminPageData: AdminPageData = <AdminPageData>{};
 
@@ -44,6 +45,7 @@ export class WaarisdatService {
 
   reset() {
     this.currentPhotoIndex = 0;
+    this.currentNumberOfPhotos = 0;
     // this.markersCorrect = [];
     this.markersGuess = [];
     this.markers = [];
@@ -62,7 +64,7 @@ export class WaarisdatService {
   async getPhotoMetadataListOfCurrentLevel() {
     if (this.currentLevel != null) {
       let result = await this.firebaseService.getPhotoMetadataOfLevel(this.currentLevel);
-      //console.log("getPhotoMetadataListOfCurrentLevel.result:" + result);
+      console.log("getPhotoMetadataListOfCurrentLevel.result:" + this.currentLevel);
       return result;
     }
   }

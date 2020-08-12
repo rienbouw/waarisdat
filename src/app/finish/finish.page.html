@@ -7,8 +7,7 @@
 
 <ion-content class="ion-content">
 
-  <agm-map #map [latitude]="centerLat" [longitude]="centerLng" [zoom]="14" [clickableIcons]="false"
-    (mapClick)="onMapClick($event.coords.lat, $event.coords.lng)">
+  <agm-map #map [latitude]="centerLat" [longitude]="centerLng" [zoom]="14" [clickableIcons]="false">
     <agm-marker *ngFor="let marker of this.waarisdatService.markers" [latitude]="marker.lat" [longitude]="marker.lng"
       [iconUrl]="marker.icon"></agm-marker>
 
