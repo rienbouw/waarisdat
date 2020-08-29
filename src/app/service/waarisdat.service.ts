@@ -46,8 +46,8 @@ export class WaarisdatService {
   reset() {
     this.currentPhotoIndex = 0;
     this.currentNumberOfPhotos = 0;
-    // this.markersCorrect = [];
     this.markersGuess = [];
+    this.markersCorrect = [];
     this.markers = [];
     this.userName = "";
     this.initializeQuiz = true;

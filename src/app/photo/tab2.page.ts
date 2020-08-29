@@ -90,7 +90,7 @@ export class PhotoPage implements OnInit {
         }
 
         if (this.waarisdatService.initializeQuiz) {
-          console.log("photo - initializeQuiz");
+          //console.log("photo - initializeQuiz");
           this.slides.slideTo(0);
           this.photoNumber = 1;
           this.waarisdatService.currentPhotoIndex = 0;
@@ -98,13 +98,13 @@ export class PhotoPage implements OnInit {
         } else {
 
           if (this.photoMetadataList == null || this.waarisdatService.currentPhotoIndex + 1 == this.photoMetadataList.length) {
-            console.log("ionViewWillEnter slide 0");
+            //console.log("ionViewWillEnter slide 0");
             this.slides.slideTo(0);
           } else {
             this.slides.slideTo(this.waarisdatService.currentPhotoIndex + 1);
             this.slides.getActiveIndex().then(index => {
-              console.log("ionViewWillEnter slide moved to " + (index + 1));
-              console.log(this.waarisdatService.currentPhotoIndex);
+              // console.log("ionViewWillEnter slide moved to " + (index + 1));
+              // console.log(this.waarisdatService.currentPhotoIndex);
             });
           }
 

@@ -209,7 +209,7 @@ export class MapPage implements OnInit {
 
   markerDragEnd(marker: any, lat: number, lng: number) {
     let photoNumber = marker["photoNumber"];
-    console.log("Photonumber " + photoNumber + " new position " + lat, lng);
+    //console.log("Photonumber " + photoNumber + " new position " + lat, lng);
     // var repositionedMarker = {
     //   lat, lng, alpha: 1,
     //   icon: {

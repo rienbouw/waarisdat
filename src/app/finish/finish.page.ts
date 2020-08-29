@@ -64,6 +64,7 @@ export class FinishPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.lines = [];
     this.feedItems = [];
     this.totalScore = 0;
     let nPhotos: number = 0; //this.waarisdatService.markersGuess.length;
@@ -133,7 +134,8 @@ export class FinishPage implements OnInit {
       let data = {
         title: title,
         description: "Totaal Score: " + this.totalScore.toString() + " van de 100",
-        uid: this.waarisdatService.userName,
+        userName: this.waarisdatService.userName,
+        date: new Date(),
         image: null
       }
       this.firebaseService.createTask(data)
