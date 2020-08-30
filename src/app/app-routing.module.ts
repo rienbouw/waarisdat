@@ -33,6 +33,14 @@ const routes: Routes = [
   },
   {
     path: 'test', component: TestPage
+  },
+  {
+    path: 'menu',
+    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
+  },
+  {
+    path: 'explanation',
+    loadChildren: () => import('./explanation/explanation.module').then( m => m.ExplanationPageModule)
   }
 ];
 @NgModule({
