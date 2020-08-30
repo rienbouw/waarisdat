@@ -18,6 +18,7 @@ export interface PhotoMetadata {
   lat: number,
   lng: number,
   level: number,
+  quizName: string,
   description: string,
   date: Date
 }
@@ -67,6 +68,13 @@ export class WaarisdatService {
       console.log("getPhotoMetadataListOfCurrentLevel.result:" + this.currentLevel);
       return result;
     }
+  }
+
+  async getCoverList() {
+
+    let result = await this.firebaseService.getCoverList();
+    return result;
+
   }
 }
 

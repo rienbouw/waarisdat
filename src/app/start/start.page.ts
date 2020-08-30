@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthService } from '../service/auth.service';
 import { WaarisdatService } from "../service/waarisdat.service";
+import { PhotoMetadata } from '../service/waarisdat.service';
 
 @Component({
   selector: 'app-start',
@@ -11,9 +12,12 @@ import { WaarisdatService } from "../service/waarisdat.service";
 })
 export class StartPage implements OnInit {
 
-  userName: string = "";
-  level: number = 1;
-  startButtonDisabled: boolean = true;
+  // userName: string = "";
+  // level: number = 1;
+  // startButtonDisabled: boolean = true;
+
+  feedItems = [];
+  private coverPhotoMetadataList: Array<PhotoMetadata>;
 
   constructor(
     public navCtrl: NavController,
@@ -24,25 +28,45 @@ export class StartPage implements OnInit {
   }
 
   ngOnInit() {
-    this.userName = this.waarisdatService.userName;
+    // this.userName = this.waarisdatService.userName;
+    // this.level = this.waarisdatService.currentLevel;
 
-    this.level = this.waarisdatService.currentLevel;
     this.waarisdatService.reset();
   }
 
-  userNameInput() {
-    this.startButtonDisabled = false;
+  ionViewWillEnter() {
+    this.feedItems = [];
+
+
+    this.waarisdatService.getCoverList().then(result => {
+      this.coverPhotoMetadataList = result;
+
+      for (var index in this.coverPhotoMetadataList) {
+        let photoMetadata = this.coverPhotoMetadataList[index];
+        var feedItem = {
+          photo: photoMetadata.imgUrl,
+          quizName: photoMetadata.quizName,
+        };
+        this.feedItems.push(feedItem);
+      }
+    });
+
   }
 
-  levelInput() {
-    this.waarisdatService.currentLevel = this.level;
+  // userNameInput() {
+  //   this.startButtonDisabled = false;
+  // }
 
-  }
+  // levelInput() {
+  //   this.waarisdatService.currentLevel = this.level;
+
+  // }
+
   startButton() {
 
-    this.waarisdatService.userName = this.userName;
-    this.waarisdatService.currentLevel = this.level;
-    //console.log("startButton " + this.level);
+    // this.waarisdatService.userName = this.userName;
+    // this.waarisdatService.currentLevel = this.level;
+    // //console.log("startButton " + this.level);
     this.router.navigate(["photo"]);
 
     // var up = {

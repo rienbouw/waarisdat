@@ -83,6 +83,16 @@ export class FirebaseService {
     }
   }
 
+  async getCoverList() {
+    const snapshot = await firebase.firestore().collection('photoMetadata')
+      .where("cover", "==", true)
+      .orderBy("level", "asc")
+      .get()
+    return snapshot.docs.map(a => {
+      const pmd = a.data() as PhotoMetadata;
+      return pmd;
+    });
+  }
 
   getTasks() {
     return new Promise<any>((resolve, reject) => {

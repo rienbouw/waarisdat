@@ -6,7 +6,20 @@
 
 <ion-content>
   <div id="body">
-    <ion-item class="rounded">
+
+    <ion-list>
+      <ion-item *ngFor=" let feed of feedItems" (click)='coverClick(feed)'>
+        <ion-card button="true">
+          <img src="{{feed.photo}}" alt="ion">
+          <ion-card-header>
+            <ion-card-title>{{feed.quizName}}</ion-card-title>
+          </ion-card-header>
+
+        </ion-card>
+      </ion-item>
+    </ion-list>
+
+    <!-- <ion-item class="rounded">
       <ion-label fixed>Spelers Naam &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </ion-label>
       <ion-input [(ngModel)]="userName" type="text" value="" (ionChange)="userNameInput()"></ion-input>
     </ion-item>
@@ -35,7 +48,7 @@
       <li>Je kunt de pinnetjes op de kaart nog verslepen</li>
       <li>Tik op <b>Klaar</b> als je de score wilt zien</li>
       <li>Puntentelling: binnen 1000m goed: 0-100 punten, binnen 50m: 100 punten</li>
-    </ul>
+    </ul> -->
   </div>
 
 </ion-content>
