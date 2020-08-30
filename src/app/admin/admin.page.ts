@@ -131,6 +131,7 @@ export class AdminPage implements OnInit {
     const data: PhotoMetadata = {
       name: this.adminPageData.name,
       level: Number(this.adminPageData.level),
+      quizName: this.adminPageData.quizName,
       lat: this.adminPageData.lat,
       lng: this.adminPageData.lng,
       imgUrl: image || this.img,

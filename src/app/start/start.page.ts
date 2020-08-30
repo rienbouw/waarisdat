@@ -45,6 +45,7 @@ export class StartPage implements OnInit {
         let photoMetadata = this.coverPhotoMetadataList[index];
         var feedItem = {
           photo: photoMetadata.imgUrl,
+          level: photoMetadata.level,
           quizName: photoMetadata.quizName,
         };
         this.feedItems.push(feedItem);
@@ -62,10 +63,10 @@ export class StartPage implements OnInit {
 
   // }
 
-  startButton() {
+  coverClick(feed: any) {
 
     // this.waarisdatService.userName = this.userName;
-    // this.waarisdatService.currentLevel = this.level;
+    this.waarisdatService.currentLevel = feed.level;
     // //console.log("startButton " + this.level);
     this.router.navigate(["photo"]);
 

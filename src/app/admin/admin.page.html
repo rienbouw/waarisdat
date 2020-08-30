@@ -36,6 +36,10 @@
       </ion-input>
     </ion-item>
     <ion-item margin-bottom margin-bottom>
+      <ion-input type="text" placeholder="Quiz naam" [(ngModel)]="adminPageData.quizName">
+      </ion-input>
+    </ion-item>
+    <ion-item margin-bottom margin-bottom>
       <ion-button slot="start" (click)="getLocationFromMap()">
         <ion-icon name="pin"></ion-icon>
       </ion-button>

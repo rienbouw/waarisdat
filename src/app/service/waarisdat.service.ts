@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 export interface AdminPageData {
   name: string;
   level: string;
+  quizName: string,
   lat: number;
   lng: number;
   urlImage: Observable<string>;
