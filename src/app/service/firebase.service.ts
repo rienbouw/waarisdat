@@ -75,6 +75,7 @@ export class FirebaseService {
     if (level != null) {
       const snapshot = await firebase.firestore().collection('photoMetadata')
         .where("level", "==", level)
+        .where("cover", "==", false) // do not get the cover photo's
         .get()
       return snapshot.docs.map(a => {
         const pmd = a.data() as PhotoMetadata;

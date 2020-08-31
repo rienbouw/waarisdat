@@ -27,6 +27,7 @@ Keywords:
 - Get random subset from Collection in Firebase
 - Upload photo into Firebase Store
 - Get EXIF from photos via 'exifr' library
+- Side menu
 
 Install:
 

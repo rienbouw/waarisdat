@@ -21,11 +21,11 @@
   ion-card {
  //   display: inline-block;
    // width: 100%;
-    margin: 5px auto  ;
-    border-radius: 15px;
+    margin: 15px auto  ;
+    border-radius: 20px;
     overflow: hidden;   
     text-align: middle;
-    background-color:#f1eee871;
+    background-color:#d3d1cd71;
   }
 
 img{
@@ -36,7 +36,7 @@ width:100%;
 #body {
 
   margin-top: 0px;
-  font-size: 20px;
+ 
   margin-left: 10px;
   margin-right: 0px;
 }
@@ -47,4 +47,9 @@ ion-card-header {
   margin-left: 16px;
   margin-bottom:10px;
   margin-top: 0px;
+}
+
+ion-card-title {
+  font-size: 18px;
+
 }

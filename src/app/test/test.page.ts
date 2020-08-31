@@ -24,19 +24,45 @@ export class TestPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log("test.ngOnInit()");
+    // console.log("test.ngOnInit()");
 
-    this.waarisdatService.getPhotoMetadataOfLevel(1).then(result => {
-      for (var index in result) {
-        var pmd: PhotoMetadata = result[index];
-        console.log(pmd);
-      }
-    });
+    // this.waarisdatService.getPhotoMetadataOfLevel(1).then(result => {
+    //   for (var index in result) {
+    //     var pmd: PhotoMetadata = result[index];
+    //     console.log(pmd);
+    //   }
+    //});
 
 
   }
   onButton() {
-    this.router.navigate(["admin"]);
+
+    let ref = firebase.firestore().collection('photoMetadata');
+
+    let result = ref
+      .where("level", "==", 5)
+      // .where("cover", "==", false) // do not get the cover photo's
+      .get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          console.log(doc.data().name);
+        });
+      });
+    //this.router.navigate(["admin"]);
+  }
+
+
+  updateButton() {
+
+    let ref = firebase.firestore().collection('photoMetadata');
+
+    let result = ref
+      // .where("level", "==", 5)
+      // .where("cover", "==", false) // do not get the cover photo's
+      .get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          ref.doc(doc.id).update("cover", false)
+        });
+      });
+    //this.router.navigate(["admin"]);
   }
 }
-
