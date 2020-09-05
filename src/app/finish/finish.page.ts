@@ -42,6 +42,7 @@ export class FinishPage implements OnInit {
   centerLat: number;
   centerLng: number;
   public lines = [];
+  userName: string = "";
 
   constructor(
     public navCtrl: NavController,
@@ -57,7 +58,10 @@ export class FinishPage implements OnInit {
     this.centerLat = 52.09067047478424;
     this.centerLng = 5.120769093002053;
   }
+  userInput() {
 
+    this.waarisdatService.userName = this.userName;
+  }
   finishDetail(feed: any) {
     this.waarisdatService.currentPhotoIndex = feed.photoNumber - 1;
     this.router.navigate(['finish-detail']);
@@ -129,24 +133,28 @@ export class FinishPage implements OnInit {
 
       }
       console.log("Totaal Score: " + this.totalScore.toString() + " van de 100");
-      var currentDate = new Date();
-      const title = this.waarisdatService.userName + ' ' + formatDate(currentDate, 'yyyy-MM-dd hh:mm', 'en-US');
-      let data = {
-        title: title,
-        description: "Totaal Score: " + this.totalScore.toString() + " van de 100",
-        userName: this.waarisdatService.userName,
-        date: new Date(),
-        image: null
-      }
-      this.firebaseService.createTask(data)
-        .then(
-          res => {
-          }
-        )
+
     });
   }
 
   restartButton() {
+
+    // Save score to the database
+    this.waarisdatService.userName = this.userName;
+    var currentDate = new Date();
+    const title = this.waarisdatService.userName + ' ' + formatDate(currentDate, 'yyyy-MM-dd hh:mm', 'en-US');
+    let data = {
+      title: title,
+      description: "Totaal Score: " + this.totalScore.toString() + " van de 100",
+      userName: this.waarisdatService.userName,
+      date: new Date(),
+      image: null
+    }
+    this.firebaseService.createTask(data)
+      .then(
+        res => {
+        }
+      )
     this.router.navigate(['start']);
   }
 

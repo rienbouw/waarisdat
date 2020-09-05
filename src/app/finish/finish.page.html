@@ -18,7 +18,7 @@
       </agm-polyline-point>
     </agm-polyline>
   </agm-map>
-  <p>Klik op een foto voor de details</p>
+  <ion-text>Klik op een foto voor de details</ion-text>
   <ion-list>
     <ion-item *ngFor=" let feed of feedItems" (click)='finishDetail(feed)'>
       <ion-thumbnail item-left>
@@ -34,6 +34,12 @@
     </ion-item>
   </ion-list>
   <h1>Totaal Score: {{totalScore}} punten</h1>
+  <p>Wil je in de high-score opgenomen worden,
+    vul dan hieronder je naam in.</p>
+  <ion-item class="rounded">
+    <ion-label fixed>Spelers Naam &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </ion-label>
+    <ion-input [(ngModel)]="userName" type="text" value="" (ionChange)="userNameInput()"></ion-input>
+  </ion-item>
   <ion-list style="text-align:center">
     <ion-button slot="end" (click)="restartButton()">
       Opnieuw
