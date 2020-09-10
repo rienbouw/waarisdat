@@ -22,7 +22,7 @@ declare var google;
 export class MapPage implements OnInit {
   centerLat: number;
   centerLng: number;
-
+  zoom: number = 14;
   address: string;
   googleMap: any;
 
@@ -41,8 +41,12 @@ export class MapPage implements OnInit {
       this.waarisdatService.markers = [];
       // console.log("ngOnInit map reset");
     }
-    this.centerLat = 52.09067047478424;
-    this.centerLng = 5.120769093002053;
+
+    var lat = this.activatedRoute.snapshot.paramMap.get('lat');
+    this.centerLat = (lat) ? Number(lat) : this.centerLat = 52.09067047478424;
+    var lng = this.activatedRoute.snapshot.paramMap.get('lng');
+    this.centerLng = (lng) ? Number(lng) : 5.120769093002053;
+    this.zoom = (lat) ? 16 : 14;
     //this.getCurrentLocation();
 
     // this.googleMap.addListener('click', function (e) {

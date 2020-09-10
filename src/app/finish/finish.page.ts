@@ -58,10 +58,7 @@ export class FinishPage implements OnInit {
     this.centerLat = 52.09067047478424;
     this.centerLng = 5.120769093002053;
   }
-  userInput() {
-
-    this.waarisdatService.userName = this.userName;
-  }
+ 
   finishDetail(feed: any) {
     this.waarisdatService.currentPhotoIndex = feed.photoNumber - 1;
     this.router.navigate(['finish-detail']);

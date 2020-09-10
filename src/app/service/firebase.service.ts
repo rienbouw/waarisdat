@@ -45,13 +45,13 @@ export class FirebaseService {
     return this.photoMetadataCollection.add(photoMetadata);
   }
 
-  reatePhotoMetadata(value) {
+  createPhotoMetadata(value) {
 
     return new Promise<any>((resolve, reject) => {
       this.afs.collection(`photo/${value.uid}/metadata`).add({
         name: value.name,
         level: value.level,
-        //number: value.number,
+        cover: value.cover,
         img: value.img,
         uid: value.uid,
         //   lat: value.lat,
@@ -95,15 +95,27 @@ export class FirebaseService {
     });
   }
 
-  getTasks() {
-    return new Promise<any>((resolve, reject) => {
-      this.afAuth.user.subscribe(currentUser => {
-        if (currentUser) {
-          this.snapshotChangesSubscription = this.afs.collection('people').doc(currentUser.uid).collection('tasks').snapshotChanges();
-          resolve(this.snapshotChangesSubscription);
-        }
-      })
-    })
+  getHighScore() {
+    //  return new Promise<any>((resolve, reject) => {
+    //  this.afAuth.user.subscribe(currentUser => {
+    let currentUser = { uid: "gek" };
+    if (currentUser) {
+      //      let ref = this.afs.collection('people').doc(currentUser.uid).collection('tasks');
+      let ref = firebase.firestore().collection('photoMetadata');
+
+      let result = ref.get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+          });
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+        });
+    }
+    //    })
+    //   })
   }
 
   getTask(taskId) {

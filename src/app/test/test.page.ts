@@ -57,12 +57,21 @@ export class TestPage implements OnInit {
 
     let result = ref
       // .where("level", "==", 5)
-      // .where("cover", "==", false) // do not get the cover photo's
+      .where("cover", "==", false) // do not get the cover photo's
       .get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           ref.doc(doc.id).update("cover", false)
         });
       });
     //this.router.navigate(["admin"]);
+  }
+
+  scoreButton() {
+
+    this.waarisdatService.getHighScore().then(
+      res => {
+        console.log(res);
+      }
+    )
   }
 }

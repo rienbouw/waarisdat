@@ -17,7 +17,7 @@
 <ion-content>
 
   <!-- (dragEnd)="markerDragEnd(coords, $event)"(mapReady)="mapLoad($event)" (mapReady)="mapReady($event)"-->
-  <agm-map #map [latitude]="centerLat" [longitude]="centerLng" [zoom]="14" [clickableIcons]="false"
+  <agm-map #map [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom" [clickableIcons]="false"
     (mapClick)="onMapClick($event.coords.lat, $event.coords.lng)">
     <agm-marker *ngFor="let marker of this.waarisdatService.markers" [latitude]="marker.lat" [longitude]="marker.lng"
       [opacity]="marker.alpha" [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)"

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 export interface AdminPageData {
   name: string;
   level: string;
+  cover: boolean;
   quizName: string,
   lat: number;
   lng: number;
@@ -19,6 +20,7 @@ export interface PhotoMetadata {
   lat: number,
   lng: number,
   level: number,
+  cover: boolean,
   quizName: string,
   description: string,
   date: Date
@@ -77,5 +79,10 @@ export class WaarisdatService {
     return result;
 
   }
-}
 
+  async getHighScore() {
+    let result = await this.firebaseService.getHighScore();
+    return result;
+
+  }
+}

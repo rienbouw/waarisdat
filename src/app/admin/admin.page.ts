@@ -76,7 +76,7 @@ export class AdminPage implements OnInit {
   getLocationFromMap() {
     this.waarisdatService.adminPageData = this.adminPageData;
     console.log(this.adminPageData.name);
-    this.router.navigate(["map", { back: "admin" }]);
+    this.router.navigate(["map", { back: "admin", lat: this.adminPageData.lat, lng: this.adminPageData.lng }]);
   }
 
   async onUpload(e) {
@@ -131,6 +131,7 @@ export class AdminPage implements OnInit {
     const data: PhotoMetadata = {
       name: this.adminPageData.name,
       level: Number(this.adminPageData.level),
+      cover: Boolean(this.adminPageData.cover),
       quizName: this.adminPageData.quizName,
       lat: this.adminPageData.lat,
       lng: this.adminPageData.lng,
