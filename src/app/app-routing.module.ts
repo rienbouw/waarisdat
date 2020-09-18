@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'explanation',
     loadChildren: () => import('./explanation/explanation.module').then( m => m.ExplanationPageModule)
+  },
+  {
+    path: 'highscore',
+    loadChildren: () => import('./highscore/highscore.module').then( m => m.HighscorePageModule)
   }
 ];
 @NgModule({

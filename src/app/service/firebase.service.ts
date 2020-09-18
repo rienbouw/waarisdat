@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from "rxjs/operators";
 import { Observable } from 'rxjs';
 import { PhotoMetadata } from '../service/waarisdat.service';
+import { UserScore } from '../service/waarisdat.service';
 
 
 @Injectable({
@@ -15,7 +16,9 @@ export class FirebaseService {
 
   private snapshotChangesSubscription: any;
   private photoMetadataList: Array<PhotoMetadata>;
+  private userScoreList: Array<UserScore>;
   private photoMetadataCollection: AngularFirestoreCollection<PhotoMetadata>;
+  private userScoreCollection: AngularFirestoreCollection<UserScore>;
 
 
   constructor(
@@ -33,6 +36,18 @@ export class FirebaseService {
           return pmd;
         })
       });
+
+    this.userScoreCollection = this.afs.collection<UserScore>('userScore');
+
+
+    this.userScoreCollection.snapshotChanges().subscribe(
+      data => {
+        this.userScoreList = data.map(a => {
+          const d = a.payload.doc.data() as UserScore;
+          console.log(d);
+          return d;
+        })
+      });
   }
 
   getUidsForLevel(level) {
@@ -45,24 +60,30 @@ export class FirebaseService {
     return this.photoMetadataCollection.add(photoMetadata);
   }
 
-  createPhotoMetadata(value) {
+  // createPhotoMetadata(value) {
 
-    return new Promise<any>((resolve, reject) => {
-      this.afs.collection(`photo/${value.uid}/metadata`).add({
-        name: value.name,
-        level: value.level,
-        cover: value.cover,
-        img: value.img,
-        uid: value.uid,
-        //   lat: value.lat,
-        //  lng: value.lng,
-        date: Date.now()
-      })
-        .then(
-          res => resolve(res),
-          err => reject(err)
-        )
-    });
+  //   return new Promise<any>((resolve, reject) => {
+  //     this.afs.collection(`photo/${value.uid}/metadata`).add({
+  //       name: value.name,
+  //       level: value.level,
+  //       cover: value.cover,
+  //       img: value.img,
+  //       uid: value.uid,
+  //       //   lat: value.lat,
+  //       //  lng: value.lng,
+  //       date: Date.now()
+  //     })
+  //       .then(
+  //         res => resolve(res),
+  //         err => reject(err)
+  //       )
+  //   });
+  // }
+
+  addUserScore(userScore) {
+    console.log("Save UserScore for " + userScore.name);
+    return this.userScoreCollection.add(userScore);
+
   }
 
   getPhotoMetadataList() {
@@ -95,27 +116,16 @@ export class FirebaseService {
     });
   }
 
-  getHighScore() {
-    //  return new Promise<any>((resolve, reject) => {
-    //  this.afAuth.user.subscribe(currentUser => {
-    let currentUser = { uid: "gek" };
-    if (currentUser) {
-      //      let ref = this.afs.collection('people').doc(currentUser.uid).collection('tasks');
-      let ref = firebase.firestore().collection('photoMetadata');
+  async getHighScore() {
 
-      let result = ref.get()
-        .then(function (querySnapshot) {
-          querySnapshot.forEach(function (doc) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-          });
-        })
-        .catch(function (error) {
-          console.log("Error getting documents: ", error);
-        });
-    }
-    //    })
-    //   })
+    const snapshot = await firebase.firestore().collection('userScore')
+      .orderBy("score", "desc")
+      .get()
+    return snapshot.docs.map(a => {
+      const pmd = a.data() as UserScore;
+      return pmd;
+    });
+
   }
 
   getTask(taskId) {

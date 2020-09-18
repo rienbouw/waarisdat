@@ -26,6 +26,14 @@ export interface PhotoMetadata {
   date: Date
 }
 
+export interface UserScore {
+  name: string,
+  score: number,
+  scoreDetails: string,
+  level: number,
+  date: Date
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -84,5 +92,10 @@ export class WaarisdatService {
     let result = await this.firebaseService.getHighScore();
     return result;
 
+  }
+
+  async addUserScore(userScore: UserScore) {
+    let result = await this.firebaseService.addUserScore(userScore);
+    return result;
   }
 }

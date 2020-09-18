@@ -42,7 +42,7 @@ export class FinishPage implements OnInit {
   centerLat: number;
   centerLng: number;
   public lines = [];
-  userName: string = "";
+  userName: string;
 
   constructor(
     public navCtrl: NavController,
@@ -58,7 +58,7 @@ export class FinishPage implements OnInit {
     this.centerLat = 52.09067047478424;
     this.centerLng = 5.120769093002053;
   }
- 
+
   finishDetail(feed: any) {
     this.waarisdatService.currentPhotoIndex = feed.photoNumber - 1;
     this.router.navigate(['finish-detail']);
@@ -134,8 +134,22 @@ export class FinishPage implements OnInit {
     });
   }
 
-  restartButton() {
+  // highScoreButton() {
+  //   this.saveScore();
+  //   this.router.navigate(['highscore']);
+  // }
 
+  restartButton() {
+    if (this.userName) {
+      console.log("Username:" + this.userName);
+      this.saveScore();
+      this.router.navigate(['highscore']);
+    }
+
+    this.router.navigate(['start']);
+  }
+
+  saveScore() {
     // Save score to the database
     this.waarisdatService.userName = this.userName;
     var currentDate = new Date();
@@ -147,12 +161,11 @@ export class FinishPage implements OnInit {
       date: new Date(),
       image: null
     }
-    this.firebaseService.createTask(data)
+    this.firebaseService.addUserScore(data)
       .then(
         res => {
         }
       )
-    this.router.navigate(['start']);
   }
 
   getDistanceBetween(p1, p2): number {

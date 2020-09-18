@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from 
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { PhotoMetadata } from '../service/waarisdat.service';
+import { UserScore } from '../service/waarisdat.service';
 import { WaarisdatService } from "../service/waarisdat.service";
 import { Router } from '@angular/router';
 
@@ -66,11 +67,31 @@ export class TestPage implements OnInit {
     //this.router.navigate(["admin"]);
   }
 
-  scoreButton() {
-
-    this.waarisdatService.getHighScore().then(
+  addUserScoreButton() {
+    const userScore: UserScore = {
+      name: 'rien',
+      score: 220,
+      level: 5,
+      scoreDetails: "det",
+      date: new Date()
+    };
+    this.waarisdatService.addUserScore(userScore).then(
       res => {
         console.log(res);
+      }
+    )
+  }
+
+
+
+  scoreButton() {
+    this.waarisdatService.getHighScore().then(
+      res => {
+        res.forEach(function (doc: UserScore) {
+          let formatted_date = doc.date.getDay + "-" + (doc.date.getMonth() + 1) + "-" + doc.date.getFullYear()
+
+          console.log(doc.name + " - " + doc.score + " op " + formatted_date);
+        });
       }
     )
   }
