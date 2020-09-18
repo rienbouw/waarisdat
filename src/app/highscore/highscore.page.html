@@ -5,5 +5,15 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list show-reorder="scoresList.show.reorder">
+    <ion-item *ngFor=" let item of highScores" class="item-icon-left">
+      <ion-label class="name" item-left> {{ item.name }}</ion-label>
+      <ion-label class="score" item-right text-right>{{ item.score }} punten</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list style="text-align:center">
+    <ion-button slot="end" (click)="restartButton()">
+      Opnieuw
+    </ion-button>
+  </ion-list>
 </ion-content>

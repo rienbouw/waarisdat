@@ -44,7 +44,7 @@ export class FirebaseService {
       data => {
         this.userScoreList = data.map(a => {
           const d = a.payload.doc.data() as UserScore;
-          console.log(d);
+          //console.log(d);
           return d;
         })
       });
@@ -81,7 +81,7 @@ export class FirebaseService {
   // }
 
   addUserScore(userScore) {
-    console.log("Save UserScore for " + userScore.name);
+    console.log("Save UserScore for " + userScore.userName);
     return this.userScoreCollection.add(userScore);
 
   }

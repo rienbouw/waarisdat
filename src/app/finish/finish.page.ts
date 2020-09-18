@@ -144,9 +144,9 @@ export class FinishPage implements OnInit {
       console.log("Username:" + this.userName);
       this.saveScore();
       this.router.navigate(['highscore']);
+    } else {
+      this.router.navigate(['start']);
     }
-
-    this.router.navigate(['start']);
   }
 
   saveScore() {
