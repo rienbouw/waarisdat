@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { LatLng } from "@ionic-native/google-maps";
-import { WaarisdatService } from "../service/waarisdat.service";
+import { UserScore, WaarisdatService } from "../service/waarisdat.service";
 import { FirebaseService } from '../service/firebase.service';
 import "../../../node_modules/@ionic/angular/css/core.css";
 import { formatDate } from '@angular/common';
@@ -154,18 +154,24 @@ export class FinishPage implements OnInit {
     this.waarisdatService.userName = this.userName;
     var currentDate = new Date();
     const title = this.waarisdatService.userName + ' ' + formatDate(currentDate, 'yyyy-MM-dd hh:mm', 'en-US');
-    let data = {
-      title: title,
-      description: "Totaal Score: " + this.totalScore.toString() + " van de 100",
-      userName: this.waarisdatService.userName,
-      date: new Date(),
-      image: null
+    let now = new Date();
+    let data: UserScore = {
+      scoreDetails: "Totaal Score: " + this.totalScore.toString() + " van de 100",
+      name: this.waarisdatService.userName,
+      date: now,
+      dateString: this.humanString(now),
+      level: this.waarisdatService.currentLevel,
+      score: this.totalScore
     }
     this.firebaseService.addUserScore(data)
       .then(
         res => {
         }
       )
+  }
+
+  humanString(date: Date): String {
+    return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
   }
 
   getDistanceBetween(p1, p2): number {

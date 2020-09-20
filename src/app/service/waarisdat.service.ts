@@ -31,7 +31,8 @@ export interface UserScore {
   score: number,
   scoreDetails: string,
   level: number,
-  date: Date
+  date: Date,
+  dateString: String
 }
 
 @Injectable({

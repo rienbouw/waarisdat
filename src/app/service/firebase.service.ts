@@ -80,8 +80,8 @@ export class FirebaseService {
   //   });
   // }
 
-  addUserScore(userScore) {
-    console.log("Save UserScore for " + userScore.userName);
+  addUserScore(userScore: UserScore) {
+    console.log("Save UserScore for " + userScore.name);
     return this.userScoreCollection.add(userScore);
 
   }

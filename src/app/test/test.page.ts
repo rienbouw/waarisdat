@@ -88,7 +88,9 @@ export class TestPage implements OnInit {
     this.waarisdatService.getHighScore().then(
       res => {
         res.forEach(function (doc: UserScore) {
-          let formatted_date = doc.date.getDay + "-" + (doc.date.getMonth() + 1) + "-" + doc.date.getFullYear()
+          var d = doc.date.toDate();
+
+          let formatted_date = d.toDateString();
 
           console.log(doc.name + " - " + doc.score + " op " + formatted_date);
         });
