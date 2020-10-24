@@ -73,7 +73,8 @@ export class TestPage implements OnInit {
       score: 220,
       level: 5,
       scoreDetails: "det",
-      date: new Date()
+      date: new Date(),
+      dateString: ""
     };
     this.waarisdatService.addUserScore(userScore).then(
       res => {
@@ -88,11 +89,11 @@ export class TestPage implements OnInit {
     this.waarisdatService.getHighScore().then(
       res => {
         res.forEach(function (doc: UserScore) {
-          var d = doc.date.toDate();
+          //var d = doc.date.toDate();
 
-          let formatted_date = d.toDateString();
+          //let formatted_date = d.toDateString();
 
-          console.log(doc.name + " - " + doc.score + " op " + formatted_date);
+          console.log(doc.name + " - " + doc.score + " op " + doc.date);
         });
       }
     )
