@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { FirebaseService } from '../service/firebase.service';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { FirebaseService } from "../service/firebase.service";
+import { Observable } from "rxjs";
 
 export interface AdminPageData {
   name: string;
   level: string;
   cover: boolean;
-  quizName: string,
+  quizName: string;
   lat: number;
   lng: number;
   urlImage: Observable<string>;
@@ -14,29 +14,29 @@ export interface AdminPageData {
 }
 
 export interface PhotoMetadata {
-  uid?: string,
-  name: string,
-  imgUrl: string,
-  lat: number,
-  lng: number,
-  level: number,
-  cover: boolean,
-  quizName: string,
-  description: string,
-  date: Date
+  uid?: string;
+  name: string;
+  imgUrl: string;
+  lat: number;
+  lng: number;
+  level: number;
+  cover: boolean;
+  quizName: string;
+  description: string;
+  date: Date;
 }
 
 export interface UserScore {
-  name: string,
-  score: number,
-  scoreDetails: string,
-  level: number,
-  date: Date,
-  dateString: String
+  name: string;
+  score: number;
+  scoreDetails: string;
+  level: number;
+  date: Date;
+  dateString: String;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class WaarisdatService {
   currentPhotoIndex: number = 0;
@@ -50,11 +50,7 @@ export class WaarisdatService {
   initializeQuiz: boolean = true;
   adminPageData: AdminPageData = <AdminPageData>{};
 
-  constructor(
-    private firebaseService: FirebaseService
-  ) {
-
-  }
+  constructor(private firebaseService: FirebaseService) {}
 
   reset() {
     this.currentPhotoIndex = 0;
@@ -76,23 +72,24 @@ export class WaarisdatService {
 
   async getPhotoMetadataListOfCurrentLevel() {
     if (this.currentLevel != null) {
-      let result = await this.firebaseService.getPhotoMetadataOfLevel(this.currentLevel);
-      console.log("getPhotoMetadataListOfCurrentLevel.result:" + this.currentLevel);
+      let result = await this.firebaseService.getPhotoMetadataOfLevel(
+        this.currentLevel
+      );
+      console.log(
+        "getPhotoMetadataListOfCurrentLevel.result:" + this.currentLevel
+      );
       return result;
     }
   }
 
   async getCoverList() {
-
     let result = await this.firebaseService.getCoverList();
     return result;
-
   }
 
   async getHighScore() {
     let result = await this.firebaseService.getHighScore();
     return result;
-
   }
 
   async addUserScore(userScore: UserScore) {
